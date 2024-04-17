@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPortfolioAspNetMvc5", "MyPortfolioAspNetMvc5\MyPortfolioAspNetMvc5.csproj", "{ABDA0304-2F46-4A0D-9DDC-9D00FD3AD9E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABDA0304-2F46-4A0D-9DDC-9D00FD3AD9E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABDA0304-2F46-4A0D-9DDC-9D00FD3AD9E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABDA0304-2F46-4A0D-9DDC-9D00FD3AD9E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABDA0304-2F46-4A0D-9DDC-9D00FD3AD9E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE18969D-7749-40B2-AD12-56110D4C1F42}
+	EndGlobalSection
+EndGlobal

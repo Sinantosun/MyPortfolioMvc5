@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DbCvModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DbCv.dbo.Abouts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Abouts">
+          <Key>
+            <PropertyRef Name="AboutID" />
+          </Key>
+          <Property Name="AboutID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="150" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Certifications">
+          <Key>
+            <PropertyRef Name="CertificationsID" />
+          </Key>
+          <Property Name="CertificationsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameSurname" Type="nvarchar" MaxLength="200" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="MessageContent" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MessageDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Educations">
+          <Key>
+            <PropertyRef Name="EducationID" />
+          </Key>
+          <Property Name="EducationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubTitle1" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubTitle2" Type="nvarchar" MaxLength="50" />
+          <Property Name="EducationGNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Experinces">
+          <Key>
+            <PropertyRef Name="ExperinceID" />
+          </Key>
+          <Property Name="ExperinceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Date" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Interests">
+          <Key>
+            <PropertyRef Name="InterestsID" />
+          </Key>
+          <Property Name="InterestsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description2" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Skills">
+          <Key>
+            <PropertyRef Name="SkillsID" />
+          </Key>
+          <Property Name="SkillsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityContainer Name="DbCvModelStoreContainer">
+          <EntitySet Name="Certifications" EntityType="Self.Certifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Educations" EntityType="Self.Educations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Experinces" EntityType="Self.Experinces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Interests" EntityType="Self.Interests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Abouts" EntityType="Self.Abouts" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Abouts].[AboutID] AS [AboutID], 
+    [Abouts].[Name] AS [Name], 
+    [Abouts].[Surname] AS [Surname], 
+    [Abouts].[Adress] AS [Adress], 
+    [Abouts].[PhoneNumber] AS [PhoneNumber], 
+    [Abouts].[Mail] AS [Mail], 
+    [Abouts].[Description] AS [Description], 
+    [Abouts].[ImageURL] AS [ImageURL]
+    FROM [dbo].[Abouts] AS [Abouts]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbCvModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Certifications">
+          <Key>
+            <PropertyRef Name="CertificationsID" />
+          </Key>
+          <Property Name="CertificationsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameSurname" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MessageContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MessageDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Educations">
+          <Key>
+            <PropertyRef Name="EducationID" />
+          </Key>
+          <Property Name="EducationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubTitle1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubTitle2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EducationGNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Experinces">
+          <Key>
+            <PropertyRef Name="ExperinceID" />
+          </Key>
+          <Property Name="ExperinceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Interests">
+          <Key>
+            <PropertyRef Name="InterestsID" />
+          </Key>
+          <Property Name="InterestsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Skills">
+          <Key>
+            <PropertyRef Name="SkillsID" />
+          </Key>
+          <Property Name="SkillsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Abouts">
+          <Key>
+            <PropertyRef Name="AboutID" />
+          </Key>
+          <Property Name="AboutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="DbCvEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Certifications" EntityType="Self.Certifications" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" />
+          <EntitySet Name="Educations" EntityType="Self.Educations" />
+          <EntitySet Name="Experinces" EntityType="Self.Experinces" />
+          <EntitySet Name="Interests" EntityType="Self.Interests" />
+          <EntitySet Name="Skills" EntityType="Self.Skills" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Abouts" EntityType="Self.Abouts" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbCvModelStoreContainer" CdmEntityContainer="DbCvEntities">
+          <EntitySetMapping Name="Certifications">
+            <EntityTypeMapping TypeName="DbCvModel.Certifications">
+              <MappingFragment StoreEntitySet="Certifications">
+                <ScalarProperty Name="CertificationsID" ColumnName="CertificationsID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="DbCvModel.Contacts">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="MessageDate" ColumnName="MessageDate" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="NameSurname" ColumnName="NameSurname" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MessageContent" ColumnName="MessageContent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Educations">
+            <EntityTypeMapping TypeName="DbCvModel.Educations">
+              <MappingFragment StoreEntitySet="Educations">
+                <ScalarProperty Name="EducationID" ColumnName="EducationID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SubTitle1" ColumnName="SubTitle1" />
+                <ScalarProperty Name="SubTitle2" ColumnName="SubTitle2" />
+                <ScalarProperty Name="EducationGNO" ColumnName="EducationGNO" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Experinces">
+            <EntityTypeMapping TypeName="DbCvModel.Experinces">
+              <MappingFragment StoreEntitySet="Experinces">
+                <ScalarProperty Name="ExperinceID" ColumnName="ExperinceID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Interests">
+            <EntityTypeMapping TypeName="DbCvModel.Interests">
+              <MappingFragment StoreEntitySet="Interests">
+                <ScalarProperty Name="InterestsID" ColumnName="InterestsID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Description2" ColumnName="Description2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="DbCvModel.Skills">
+              <MappingFragment StoreEntitySet="Skills">
+                <ScalarProperty Name="SkillsID" ColumnName="SkillsID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DbCvModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Abouts">
+            <EntityTypeMapping TypeName="DbCvModel.Abouts">
+              <MappingFragment StoreEntitySet="Abouts">
+                <ScalarProperty Name="AboutID" ColumnName="AboutID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

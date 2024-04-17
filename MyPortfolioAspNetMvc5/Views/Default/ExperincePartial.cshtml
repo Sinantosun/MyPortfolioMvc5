@@ -1,0 +1,22 @@
+﻿@using MyPortfolioAspNetMvc5.Models.Entity
+@model List<Experinces>
+
+<section class="resume-section" id="experience">
+    <div class="resume-section-content">
+        <h2 class="mb-5">Deneyimlerim</h2>
+        @foreach (var item in Model)
+        {
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">@item.Title</h3>
+                    <div class="subheading mb-3">@item.SubTitle</div>
+                    <p>@item.Description.</p>
+                </div>
+                <div class="flex-shrink-0"><span class="text-primary">@item.Date</span></div>
+            </div>
+        }
+        </div>
+ 
+    </section>
+
+
