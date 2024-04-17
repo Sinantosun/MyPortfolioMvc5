@@ -1,0 +1,35 @@
+﻿@using MyPortfolioAspNetMvc5.Models.Entity
+@model Experinces
+@{
+    ViewBag.Title = "AddExperince";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <br />
+                <h1>Yeni Deneyim Ekleme Sayfası</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="form-group container-fluid">
+    @Html.Label("Başlık")
+    @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+    <br />
+    @Html.Label("Alt Başlık")
+    @Html.TextBoxFor(x => x.SubTitle, new { @class = "form-control" })
+    <br />
+    @Html.Label("Açıklama")
+    @Html.TextAreaFor(x => x.SubTitle,10,1, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-outline-primary"><i class="fa fa-pen"></i>&nbsp; Ekle</button>
+</div>
+
+
+
+
+
