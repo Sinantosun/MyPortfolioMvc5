@@ -1,0 +1,33 @@
+﻿
+
+@if (TempData["Result"] != null)
+{
+
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <div class="alert alert-@TempData["Icon"] style="display:none">
+        @Html.Raw(TempData["Result"])
+    </div>
+
+    <script>
+        $(function () {
+            $(".alert").fadeIn();
+
+        })
+    </script>
+
+
+    if (TempData["IsError"] != null)
+    {
+        <script>
+            $(function () {
+                $(".alert").fadeOut(1500);
+
+            })
+        </script>
+    }
+
+
+}
+

@@ -1,7 +1,7 @@
 ﻿@using MyPortfolioAspNetMvc5.Models.Entity
-@model Experinces
+@model Educations
 @{
-    ViewBag.Title = "AddExperince";
+    ViewBag.Title = "AddEducation";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -10,7 +10,7 @@
         <div class="row mb-2">
             <div class="col-sm-6">
                 <br />
-                <h1>Yeni Deneyim Ekleme Sayfası</h1>
+                <h1>Yeni Eğitim Ekleme Sayfası</h1>
             </div>
         </div>
     </div>
@@ -21,21 +21,24 @@
         @Html.Label("Başlık")
         @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
         <br />
-        @Html.Label("Alt Başlık")
-        @Html.TextBoxFor(x => x.SubTitle, new { @class = "form-control" })
+        @Html.Label("1. Alt Başlık")
+        @Html.TextBoxFor(x => x.SubTitle1, new { @class = "form-control" })
         <br />
-        @Html.Label("Tarih (Metin)")
-        @Html.TextBoxFor(x=>x.Date,new {@class="form-control"})
+        @Html.Label("2. Alt Başlık")
+        @Html.TextBoxFor(x => x.SubTitle2, new { @class = "form-control" })
         <br />
-        @Html.Label("Açıklama")
-        <textarea name="description" class="form-control" rows="10"></textarea>
+        @Html.Label("GNO")
+        @Html.TextBoxFor(x => x.EducationGNO, new { @class = "form-control" })
+        <br />
+        @Html.Label("Tarih")
+        @Html.TextBoxFor(x => x.Date, new { @class = "form-control" })
         <br />
         <button class="btn btn-outline-primary"><i class="fa fa-pen"></i>&nbsp; Ekle</button>
     </form>
 </div>
 
-
-
 @Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
+
 
 

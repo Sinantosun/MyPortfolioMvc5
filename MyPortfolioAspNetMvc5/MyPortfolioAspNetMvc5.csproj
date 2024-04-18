@@ -139,8 +139,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AboutsController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\EducationController.cs" />
     <Compile Include="Controllers\ExperinceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,6 +195,9 @@
     <Compile Include="Repositoryies\InterestRepository.cs" />
     <Compile Include="Repositoryies\SkillsRepository.cs" />
     <Compile Include="ValidationResults\ContactValidations\ContactValidator.cs" />
+    <Compile Include="ValidationResults\EducationValidators\EducationValidator.cs" />
+    <Compile Include="ValidationResults\ExperinceValidators\ExperinceValidator.cs" />
+    <Compile Include="ValidationResults\SkillValidators\SkillValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -2367,9 +2372,18 @@
     <Content Include="Views\Abouts\Index.cshtml" />
     <Content Include="Views\Experince\Index.cshtml" />
     <Content Include="Views\Experince\AddExperince.cshtml" />
+    <Content Include="Views\LayoutPartial\NotificationPartial.cshtml" />
+    <Content Include="Views\Experince\UpdateExperince.cshtml" />
+    <Content Include="Views\Skills\Index.cshtml" />
+    <Content Include="Views\Skills\AddSkill.cshtml" />
+    <Content Include="Views\Skills\UpdateSkill.cshtml" />
+    <Content Include="Views\Education\Index.cshtml" />
+    <Content Include="Views\Education\AddEducation.cshtml" />
+    <Content Include="Views\Education\UpdateEducation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\_AdminLayout\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

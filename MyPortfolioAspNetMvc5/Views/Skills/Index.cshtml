@@ -1,0 +1,108 @@
+﻿@using MyPortfolioAspNetMvc5.Models.Entity
+@model List<Skills>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+
+    string backgroundColor = "";
+    string backgroundColor2 = "";
+}
+
+
+
+
+<div class="wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Yeteneklerim Alanı</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Yetenek Listesi</h3><br /><br />
+                            <a href="/Skills/AddSkill/" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i>&nbsp; Yeni Yetenek Ekle</a>
+                            <br />
+                            <br />
+                        </div>
+                     
+                        <div class="card-body">
+                            <table class="table table-responsive-md table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Yetenek</th>
+                                        <th>Derece</th>
+                                        <th style="width: 40px">Oran</th>
+                                        <th colspan="2" class="text-center">İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        if (item.SkillValue >= 0 && item.SkillValue <= 50)
+                                        {
+                                            backgroundColor = "progress-bar bg-danger";
+                                            backgroundColor2 = "badge bg-danger";
+                                        }
+                                        if (item.SkillValue >= 51 && item.SkillValue <= 70)
+                                        {
+                                            backgroundColor = "progress-bar bg-warning";
+                                            backgroundColor2 = "badge bg-warning";
+                                        }
+                                        if (item.SkillValue >= 71 && item.SkillValue <= 84)
+                                        {
+                                            backgroundColor = "progress-bar bg-primary";
+                                            backgroundColor2 = "badge bg-primary";
+                                        }
+                                        if (item.SkillValue >= 85 && item.SkillValue <= 100)
+                                        {
+                                            backgroundColor = "progress-bar bg-success";
+                                            backgroundColor2 = "badge bg-success";
+                                        }
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.Name</td>
+                                            <td>
+                                                <div class="progress progress-xs">
+                                                    <div class="@backgroundColor" style="width: @item.SkillValue%"></div>
+                                                </div>
+                                            </td>
+                                            <td><span class="@backgroundColor2">@item.SkillValue%</span></td>
+                                            <td style="text-align:center">
+                                                <a href="/Skills/DeleteSkill/@item.SkillsID" class="btn btn-outline-danger"><i class="fa fa-trash"></i>&nbsp; Sil</a>
+                                            </td>
+                                            <td>
+                                                <a href="/Skills/UpdateSkill/@item.SkillsID" class="btn btn-outline-success"><i class="fa fa-edit"></i>&nbsp; Güncelle</a>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
+
+
+

@@ -8,42 +8,46 @@
 
 
 
+
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
 
                 <h1>Deneyimlerim Alanı</h1>
                 <br />
                 <a href="/Experince/AddExperince/" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i>&nbsp; Yeni Deneyim Ekle</a>
+                <br />           <br />
+
             </div>
         </div>
     </div><!-- /.container-fluid -->
 </section>
 
 
-    <table class="table table-hover">
+<table class="table table-hover">
+    <tr>
+        <th>#</th>
+        <th>Başlık</th>
+        <th>Alt Başlık</th>
+        <th>Tarih</th>
+        <th class="text-center" colspan="2">İşlem</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        count++;
         <tr>
-            <th>#</th>
-            <th>Başlık</th>
-            <th>Alt Başlık</th>
-            <th>Tarih</th>
-            <th class="text-center" colspan="2">İşlem</th>
-
+            <th>@count</th>
+            <td>@item.Title</td>
+            <td>@item.SubTitle</td>
+            <td>@item.Date</td>
+            <td><a href="/Experince/DeleteExperince/@item.ExperinceID" class="btn btn-outline-danger"><i class="fa fa-trash"></i>&nbsp; Sil</a></td>
+            <td><a href="/Experince/UpdateExperince/@item.ExperinceID" class="btn btn-outline-success"><i class="fa fa-edit"></i>&nbsp; Güncelle</a></td>
         </tr>
-        @foreach (var item in Model)
-        {
-            count++;
-            <tr>
-                <th>@item.ExperinceID</th>
-                <td>@item.Title</td>
-                <td>@item.SubTitle</td>
-                <td>@item.Date</td>
-                <td><a href="/Experince/DeleteExperince/@item.ExperinceID" class="btn btn-outline-danger"><i class="fa fa-trash"></i>&nbsp; Sil</a></td>
-                <td><a href="/Experince/UpdateExperince/@item.ExperinceID" class="btn btn-outline-success"><i class="fa fa-edit"></i>&nbsp; Güncelle</a></td>
-            </tr>
-        }
-    </table>
-
+    }
+</table>
+<br />
+@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
 
 

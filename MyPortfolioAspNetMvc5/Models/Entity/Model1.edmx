@@ -5,8 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DbCvModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DbCv.dbo.Abouts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Abouts">
           <Key>
             <PropertyRef Name="AboutID" />
@@ -73,6 +71,7 @@ warning 6002: The table/view 'DbCv.dbo.Abouts' does not have a primary key defin
           </Key>
           <Property Name="SkillsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="SkillValue" Type="tinyint" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -83,6 +82,7 @@ warning 6002: The table/view 'DbCv.dbo.Abouts' does not have a primary key defin
           <Property Name="Password" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityContainer Name="DbCvModelStoreContainer">
+          <EntitySet Name="Abouts" EntityType="Self.Abouts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Certifications" EntityType="Self.Certifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Educations" EntityType="Self.Educations" Schema="dbo" store:Type="Tables" />
@@ -90,18 +90,6 @@ warning 6002: The table/view 'DbCv.dbo.Abouts' does not have a primary key defin
           <EntitySet Name="Interests" EntityType="Self.Interests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Abouts" EntityType="Self.Abouts" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Abouts].[AboutID] AS [AboutID], 
-    [Abouts].[Name] AS [Name], 
-    [Abouts].[Surname] AS [Surname], 
-    [Abouts].[Adress] AS [Adress], 
-    [Abouts].[PhoneNumber] AS [PhoneNumber], 
-    [Abouts].[Mail] AS [Mail], 
-    [Abouts].[Description] AS [Description], 
-    [Abouts].[ImageURL] AS [ImageURL]
-    FROM [dbo].[Abouts] AS [Abouts]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -160,6 +148,7 @@ warning 6002: The table/view 'DbCv.dbo.Abouts' does not have a primary key defin
           </Key>
           <Property Name="SkillsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SkillValue" Type="Byte" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -253,6 +242,7 @@ warning 6002: The table/view 'DbCv.dbo.Abouts' does not have a primary key defin
           <EntitySetMapping Name="Skills">
             <EntityTypeMapping TypeName="DbCvModel.Skills">
               <MappingFragment StoreEntitySet="Skills">
+                <ScalarProperty Name="SkillValue" ColumnName="SkillValue" />
                 <ScalarProperty Name="SkillsID" ColumnName="SkillsID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>

@@ -1,7 +1,7 @@
 ﻿@using MyPortfolioAspNetMvc5.Models.Entity
-@model Experinces
+@model Skills
 @{
-    ViewBag.Title = "AddExperince";
+    ViewBag.Title = "AddSkill";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -10,7 +10,7 @@
         <div class="row mb-2">
             <div class="col-sm-6">
                 <br />
-                <h1>Yeni Deneyim Ekleme Sayfası</h1>
+                <h1>Yeni Yetenek Ekleme Sayfası</h1>
             </div>
         </div>
     </div>
@@ -18,17 +18,11 @@
 
 <div class="form-group container-fluid">
     <form method="post">
-        @Html.Label("Başlık")
-        @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+        @Html.Label("Yetenek Adı")
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
         <br />
-        @Html.Label("Alt Başlık")
-        @Html.TextBoxFor(x => x.SubTitle, new { @class = "form-control" })
-        <br />
-        @Html.Label("Tarih (Metin)")
-        @Html.TextBoxFor(x=>x.Date,new {@class="form-control"})
-        <br />
-        @Html.Label("Açıklama")
-        <textarea name="description" class="form-control" rows="10"></textarea>
+        @Html.Label("Yetenek Oranı")
+        @Html.TextBoxFor(x => x.SkillValue, new { @class = "form-control" })
         <br />
         <button class="btn btn-outline-primary"><i class="fa fa-pen"></i>&nbsp; Ekle</button>
     </form>
@@ -37,5 +31,4 @@
 
 
 @Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
-
 

@@ -16,5 +16,6 @@ namespace MyPortfolioAspNetMvc5.Models.Entity
     {
         public int SkillsID { get; set; }
         public string Name { get; set; }
+        public Nullable<byte> SkillValue { get; set; }
     }
 }

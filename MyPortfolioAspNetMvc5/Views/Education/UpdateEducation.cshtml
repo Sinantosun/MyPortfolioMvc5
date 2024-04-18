@@ -1,0 +1,49 @@
+﻿@using MyPortfolioAspNetMvc5.Models.Entity
+@model Educations
+@{
+    ViewBag.Title = "UpdateEducation";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <br />
+                <h1>Eğitim Güncelleme Sayfası</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="form-group container-fluid">
+    <form method="post">
+        @Html.HiddenFor(x => x.EducationID, new { @class = "form-control" })
+        @Html.Label("Başlık")
+        @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+        <br />
+        @Html.Label("1. Alt Başlık")
+        @Html.TextBoxFor(x => x.SubTitle1, new { @class = "form-control" })
+        <br />
+        @Html.Label("2. Alt Başlık")
+        @Html.TextBoxFor(x => x.SubTitle2, new { @class = "form-control" })
+        <br />
+        @Html.Label("GNO")
+        @Html.TextBoxFor(x => x.EducationGNO, new { @class = "form-control" })
+        <br />
+        @Html.Label("Tarih")
+        @Html.TextBoxFor(x => x.Date, new { @class = "form-control" })
+        <br />
+        <button class="btn btn-outline-primary"><i class="fa fa-edit"></i>&nbsp; Güncelle</button>
+    </form>
+</div>
+
+@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
+
+
+
+
+

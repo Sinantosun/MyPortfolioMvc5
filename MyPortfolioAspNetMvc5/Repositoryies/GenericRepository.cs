@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using MyPortfolioAspNetMvc5.Models.Entity;
 namespace MyPortfolioAspNetMvc5.Repositoryies
@@ -26,12 +27,17 @@ namespace MyPortfolioAspNetMvc5.Repositoryies
         }
         public void Update(T t)
         {
+            
             _context.SaveChanges();
         }
         public T GetByID(int id)
         {
             return _context.Set<T>().Find(id);
            
+        }
+        public T Filter(Expression<Func<T,bool>> where)
+        {
+            return _context.Set<T>().FirstOrDefault(where);
         }
     }
 }
