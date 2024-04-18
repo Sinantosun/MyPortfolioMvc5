@@ -1,0 +1,83 @@
+﻿@using MyPortfolioAspNetMvc5.Models.Entity
+@model List<Projects>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<div class="wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Projelerim Alanı</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Projelerimin Listesi</h3><br /><br />
+                            <a href="/Projects/AddProject/" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i>&nbsp; Yeni Proje Ekle</a>
+                            <br />
+                            <br />
+                        </div>
+
+                        <div class="card-body">
+                            <table class="table table-responsive-lg table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Proje Adı</th>
+                                        <th>Proje Başlığı</th>
+                                        <th>Proje Görseli</th>
+                                        <th>GİTHUB</th>
+                                        <th colspan="2" class="text-center">İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.ProjectName</td>
+                                            <td>@item.ProjectTitle</td>
+                                            <td><img src="@item.ProjectImage" class="img-thumbnail" /></td>
+                                            <td><a href="@item.ProjectGithubURL" class="btn btn-outline-info" target="_blank">Githubda Aç</a></td>
+
+                                            <td style="text-align:center">
+                                                <a href="/Projects/DeleteProjects/@item.ProjectID" class="btn btn-outline-danger"><i class="fa fa-trash"></i>&nbsp; Sil</a>
+                                            </td>
+                                            <td>
+                                                <a href="/Projects/UpdateProjects/@item.ProjectID" class="btn btn-outline-success"><i class="fa fa-edit"></i>&nbsp; Güncelle</a>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
+
+
+
+
+
+

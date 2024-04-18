@@ -1,0 +1,79 @@
+﻿@using MyPortfolioAspNetMvc5.Models.Entity
+@model Projects
+@{
+    ViewBag.Title = "AddProject";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Projelerim Alanı</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <br />
+                            <h3 class="card-title">Yeni Proje Ekleme Sayfası</h3><br /><br />
+                        </div>
+
+                        <div class="card-body">
+                            <form method="post">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        @Html.Label("Proje Adı")
+                                        @Html.TextBoxFor(x => x.ProjectName, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Proje Başlığı")
+                                        @Html.TextBoxFor(x => x.ProjectTitle, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Proje GitHubURL")
+                                        @Html.TextBoxFor(x => x.ProjectGithubURL, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">File input</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" name="ProjectImage" class="custom-file-input" id="exampleInputFile">
+                                                <label class="custom-file-label" for="exampleInputFile">Proje Kapak Görselini Seçiniz</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Proje Açıklaması (500 karakter)")
+                                       <textarea name="ProjectDescription" class="form-control" rows="10"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-outline-primary"><i class="fa fa-pen"></i>&nbsp; Ekle</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
+
+
+
+
+

@@ -53,6 +53,7 @@ namespace MyPortfolioAspNetMvc5.Controllers
             skillsRepository.Delete(value);
             TempData["Result"] = "Kayıt Silindi.";
             TempData["Icon"] = "success";
+            TempData["IsError"] = "true";
             return RedirectToAction("Index");
         }
 

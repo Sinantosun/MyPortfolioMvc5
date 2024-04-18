@@ -1,0 +1,40 @@
+﻿
+@using MyPortfolioAspNetMvc5.Models.Entity
+@model Certifications
+@{
+    ViewBag.Title = "AddCertificate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <br />
+                <h1>Yeni Sertifika Ekleme Sayfası</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="form-group container-fluid">
+    <form method="post">
+        @Html.Label("Açıklama")
+        @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Description,"",new {@class="text-danger"})
+        <br />
+        <br />
+        <button class="btn btn-outline-primary"><i class="fa fa-pen"></i>&nbsp; Ekle</button>
+    </form>
+</div>
+
+@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
+
+
+
+
+

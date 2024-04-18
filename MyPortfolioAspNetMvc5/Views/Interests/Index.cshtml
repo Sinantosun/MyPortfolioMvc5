@@ -1,5 +1,6 @@
 ﻿@using MyPortfolioAspNetMvc5.Models.Entity
-@model List<Experinces>
+@model List<Interests>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -7,12 +8,13 @@
 }
 
 
+
 <div class="wrapper">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Deneyimlerim Alanı</h1>
+                    <h1>Hobilerim Alanı</h1>
                 </div>
             </div>
         </div>
@@ -25,8 +27,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Deneyim Listesi</h3><br /><br />
-                            <a href="/Experince/AddExperince/" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i>&nbsp; Yeni Deneyim Ekle</a>
+                            <h3 class="card-title">Hobi Listesi</h3><br /><br />
+                            <a href="/Interests/Addinterests/" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i>&nbsp; Yeni Hobi Ekle</a>
                             <br />
                             <br />
                         </div>
@@ -36,11 +38,9 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Başlık</th>
-                                        <th>Alt Başlık</th>
-                                        <th>Tarih</th>
+                                        <th>1.Açıklama </th>
+                                        <th>2.Açıklama</th>
                                         <th class="text-center" colspan="2">İşlem</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -49,12 +49,12 @@
                                         count++;
                                         <tr>
                                             <th>@count</th>
-                                            <td>@item.Title</td>
-                                            <td>@item.SubTitle</td>
-                                            <td>@item.Date</td>
-                                            <td><a href="/Experince/DeleteExperince/@item.ExperinceID" class="btn btn-outline-danger"><i class="fa fa-trash"></i>&nbsp; Sil</a></td>
-                                            <td><a href="/Experince/UpdateExperince/@item.ExperinceID" class="btn btn-outline-success"><i class="fa fa-edit"></i>&nbsp; Güncelle</a></td>
+                                            <td>@(item.Description.Length>=50?item.Description.Substring(0,50)+"...":item.Description)</td>
+                                            <td>@(item.Description2.Length>=50?item.Description2.Substring(0,50)+"...":item.Description2)</td>
+                                            <td><a href="/Interests/DeleteInterests/@item.InterestsID" class="btn btn-outline-danger"><i class="fa fa-trash"></i>&nbsp; Sil</a></td>
+                                            <td><a href="/Interests/UpdateInterests/@item.InterestsID" class="btn btn-outline-success"><i class="fa fa-edit"></i>&nbsp; Güncelle</a></td>
                                         </tr>
+
                                     }
                                 </tbody>
                             </table>

@@ -1,0 +1,39 @@
+﻿
+@using MyPortfolioAspNetMvc5.Models.Entity
+@model Certifications
+@{
+    ViewBag.Title = "UpdateCertificate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <br />
+                <h1>Sertifika Güncelleme Sayfası</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="form-group container-fluid">
+    <form method="post">
+        @Html.HiddenFor(x => x.CertificationsID, new { @class = "form-control" })
+        @Html.Label("Açıklama")
+        @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Description)
+        <br />
+        <button class="btn btn-outline-primary"><i class="fa fa-edit"></i>&nbsp; Güncelle</button>
+    </form>
+</div>
+
+@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
+
+
+
+
+
+
+

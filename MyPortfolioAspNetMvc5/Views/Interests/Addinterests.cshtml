@@ -1,0 +1,40 @@
+﻿@using MyPortfolioAspNetMvc5.Models.Entity
+@model Certifications
+@{
+    ViewBag.Title = "Addinterests";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <br />
+                <h1>Yeni Hobi Ekleme Sayfası</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="form-group container-fluid">
+    <form method="post">
+        @Html.Label("1.Açıklama")
+        <textarea name="Description" class="form-control" rows="5"></textarea>
+        <br /> 
+        @Html.Label("2.Açıklama")
+        <textarea name="Description2" class="form-control" rows="5"></textarea>
+        <br />
+        <button class="btn btn-outline-primary"><i class="fa fa-pen"></i>&nbsp; Ekle</button>
+    </form>
+</div>
+
+@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
+
+
+
+
+
+
+

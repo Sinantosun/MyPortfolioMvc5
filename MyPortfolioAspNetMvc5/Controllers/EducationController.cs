@@ -49,8 +49,6 @@ namespace MyPortfolioAspNetMvc5.Controllers
 
         }
 
-
-
         [HttpGet]
         public ActionResult UpdateEducation(int id)
         {

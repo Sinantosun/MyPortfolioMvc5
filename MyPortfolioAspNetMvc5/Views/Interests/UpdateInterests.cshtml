@@ -1,0 +1,45 @@
+﻿@using MyPortfolioAspNetMvc5.Models.Entity
+@model  Interests
+
+
+@{
+    ViewBag.Title = "UpdateInterests";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <br />
+                <h1>Yeni Hobi Ekleme Sayfası</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="form-group container-fluid">
+    <form method="post">
+        @Html.HiddenFor(x => x.InterestsID)
+        @Html.Label("İlk Açıklama")
+        <textarea name="Description" class="form-control" rows="5">@Model.Description</textarea>
+        <br />
+        @Html.Label("İkinci Açıklama")
+    <textarea name="Description2" class="form-control" rows="5">@Model.Description2</textarea>
+        <br />
+        <button class="btn btn-outline-primary"><i class="fa fa-edit"></i>&nbsp; Güncelle</button>
+    </form>
+</div>
+
+@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
+
+
+
+
+
+
+
+
+
