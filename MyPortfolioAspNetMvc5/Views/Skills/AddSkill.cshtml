@@ -5,30 +5,64 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <br />
-                <h1>Yeni Yetenek Ekleme Sayfası</h1>
+<div class="wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Yeteneklerim Alanı</h1>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<div class="form-group container-fluid">
-    <form method="post">
-        @Html.Label("Yetenek Adı")
-        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
-        <br />
-        @Html.Label("Yetenek Oranı")
-        @Html.TextBoxFor(x => x.SkillValue, new { @class = "form-control" })
-        <br />
-        <button class="btn btn-outline-primary"><i class="fa fa-pen"></i>&nbsp; Ekle</button>
-    </form>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <br />
+                            <h3 class="card-title">Yeni Yetenek Ekleme Sayfası</h3><br /><br />
+                        </div>
+
+                        <div class="card-body">
+                            <form method="post">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        @Html.Label("Yetenek Adı")
+                                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Yetenek Oranı")
+                                        @Html.TextBoxFor(x => x.SkillValue, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-outline-primary"><i class="fa fa-pen"></i>&nbsp; Ekle</button>
+                                    </div>
+                                    @Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 
 
-@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
+
+
+
+
+
+
+
+
+
 

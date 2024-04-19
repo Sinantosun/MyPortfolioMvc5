@@ -74,8 +74,9 @@ namespace MyPortfolioAspNetMvc5.Controllers
                 string err = string.Join("<br>", validationResult.Errors.Select(x => x.ErrorMessage));
                 TempData["Result"] = err;
                 TempData["Icon"] = "danger";
-                return View();
+                return View(value);
             }
+
 
         }
 

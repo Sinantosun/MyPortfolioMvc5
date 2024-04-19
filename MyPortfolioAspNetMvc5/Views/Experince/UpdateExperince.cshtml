@@ -5,39 +5,76 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <br />
-                <h1>Deneyim Güncelleme Sayfası</h1>
+
+<div class="wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Deneyimlerim Alanı</h1>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<div class="form-group container-fluid">
-    <form method="post">
-        @Html.HiddenFor(x => x.ExperinceID)
-        @Html.Label("Başlık")
-        @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
-        <br />
-        @Html.Label("Alt Başlık")
-        @Html.TextBoxFor(x => x.SubTitle, new { @class = "form-control" })
-        <br />
-        @Html.Label("Tarih (Metin)")
-        @Html.TextBoxFor(x => x.Date, new { @class = "form-control" })
-        <br />
-        @Html.Label("Açıklama")
-        <textarea name="description" class="form-control" rows="10">@Model.Description</textarea>
-        <br />
-        <button class="btn btn-outline-primary"><i class="fa fa-edit"></i>&nbsp; Güncelle</button>
-    </form>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <br />
+                            <h3 class="card-title">Deneyim Güncelleme Sayfası</h3><br /><br />
+                        </div>
+
+                        <div class="card-body">
+                            <form method="post">
+                                @Html.HiddenFor(x => x.ExperinceID)
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        @Html.Label("Başlık")
+                                        @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Alt Başlık")
+                                        @Html.TextBoxFor(x => x.SubTitle, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Tarih (Metin)")
+                                        @Html.TextBoxFor(x => x.Date, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Açıklama")
+                                        <textarea rows="5" class="form-control" name="Description">@Model.Description</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-outline-primary"><i class="fa fa-edit"></i>&nbsp; Güncelle</button>
+                                    </div>
+                                    @Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 
 
-@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
+
+
+
+
+
+
+
+
+
 
 
 

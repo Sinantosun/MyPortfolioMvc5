@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="card-body">
-                            <form method="post">
+                            <form method="post" enctype="multipart/form-data">
                                 <div class="card-body">
                                     <div class="form-group">
                                         @Html.Label("Proje Adı")
@@ -44,7 +44,7 @@
                                         @Html.TextBoxFor(x => x.ProjectGithubURL, new { @class = "form-control" })
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputFile">File input</label>
+                                        <label for="exampleInputFile">Kapak Görseli</label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" name="ProjectImage" class="custom-file-input" id="exampleInputFile">
@@ -54,11 +54,12 @@
                                     </div>
                                     <div class="form-group">
                                         @Html.Label("Proje Açıklaması (500 karakter)")
-                                       <textarea name="ProjectDescription" class="form-control" rows="10"></textarea>
+                                        <textarea name="ProjectDescription" class="form-control" rows="10"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <button class="btn btn-outline-primary"><i class="fa fa-pen"></i>&nbsp; Ekle</button>
                                     </div>
+                                    @Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
                                 </div>
                             </form>
                         </div>
@@ -70,7 +71,7 @@
     </section>
 </div>
 
-@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
 
 
 

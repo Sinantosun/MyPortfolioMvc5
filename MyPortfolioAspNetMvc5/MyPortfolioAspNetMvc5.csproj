@@ -201,10 +201,12 @@
     <Compile Include="Repositoryies\InterestRepository.cs" />
     <Compile Include="Repositoryies\ProjectRepository.cs" />
     <Compile Include="Repositoryies\SkillsRepository.cs" />
+    <Compile Include="ValidationResults\AboutValidators\AboutValidator.cs" />
     <Compile Include="ValidationResults\ContactValidations\ContactValidator.cs" />
     <Compile Include="ValidationResults\EducationValidators\EducationValidator.cs" />
     <Compile Include="ValidationResults\ExperinceValidators\ExperinceValidator.cs" />
     <Compile Include="ValidationResults\InterestsValidators\InterestsValidator.cs" />
+    <Compile Include="ValidationResults\ProjectValidators\ProjectValidator.cs" />
     <Compile Include="ValidationResults\SkillValidators\SkillValidator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2402,6 +2404,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Projects\" />
     <Folder Include="Views\_AdminLayout\" />
   </ItemGroup>
   <ItemGroup>
