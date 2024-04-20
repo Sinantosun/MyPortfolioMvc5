@@ -139,13 +139,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AboutsController.cs" />
     <Compile Include="Controllers\CertificateController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\EducationController.cs" />
     <Compile Include="Controllers\ExperinceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InterestsController.cs" />
+    <Compile Include="Controllers\ProjectDetailsController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
+    <Compile Include="Controllers\UILayoutController.cs" />
+    <Compile Include="DAL\ExtensionValidator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -182,10 +186,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entity\ProjectImages.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entity\Projects.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Skills.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Users.cs">
@@ -199,6 +209,7 @@
     <Compile Include="Repositoryies\ExperincesRepository.cs" />
     <Compile Include="Repositoryies\GenericRepository.cs" />
     <Compile Include="Repositoryies\InterestRepository.cs" />
+    <Compile Include="Repositoryies\ProjectImagesRepository.cs" />
     <Compile Include="Repositoryies\ProjectRepository.cs" />
     <Compile Include="Repositoryies\SkillsRepository.cs" />
     <Compile Include="ValidationResults\AboutValidators\AboutValidator.cs" />
@@ -2401,6 +2412,15 @@
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\Projects\AddProject.cshtml" />
     <Content Include="Views\Projects\UpdateProjects.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\UILayout\Index.cshtml" />
+    <Content Include="Views\Default\AboutPartial.cshtml" />
+    <Content Include="Views\ProjectDetails\Index.cshtml" />
+    <Content Include="Views\Default\ProjectPartial.cshtml" />
+    <Content Include="Views\Projects\AddProjectImage.cshtml" />
+    <Content Include="Views\Projects\ProjectsImages.cshtml" />
+    <Content Include="Views\ProjectDetails\GetImagesFilter.cshtml" />
+    <Content Include="Views\Projects\UpdateProjectImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

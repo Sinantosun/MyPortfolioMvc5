@@ -3,7 +3,7 @@
 
 namespace MyPortfolioAspNetMvc5.Repositoryies
 {
-    public class ContactRepository : GenericRepository<Skills>
+    public class ContactRepository : GenericRepository<Contacts>
     {
     }
 }

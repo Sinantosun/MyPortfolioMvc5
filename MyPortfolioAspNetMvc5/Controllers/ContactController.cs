@@ -7,15 +7,13 @@ using System.Web.Mvc;
 
 namespace MyPortfolioAspNetMvc5.Controllers
 {
-    public class AboutsController : Controller
+    public class ContactController : Controller
     {
-
-        AboutRepository AboutRepository = new AboutRepository();
+        ContactRepository ContactRepository = new ContactRepository();
         public ActionResult Index()
         {
-            var values = AboutRepository.GetList();
+            var values = ContactRepository.GetList();
             return View(values);
         }
-
     }
 }

@@ -1,0 +1,71 @@
+﻿@model MyPortfolioAspNetMvc5.Models.Entity.Projects
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | E-commerce</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/Templates/AdminLTE-3.0.4/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/Templates/AdminLTE-3.0.4/dist/css/adminlte.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+
+
+<div class="wrapper">
+
+
+    <div class="card card-solid">
+        <div class="card-body">
+            <div class="row mt-2">
+                <div class="col-12 col-sm-6">
+                    <h3 class="d-inline-block d-sm-none"></h3>
+                    <div class="col-12">
+                        <img src="@Model.ProjectImage" class="product-image img-thumbnail " style="width:100%; height:500px; object-fit:contain" alt="Product Image">
+                    </div>
+                    <div class="col-12 product-image-thumbs">
+                        <div class="product-image-thumb"><img src="@Model.ProjectImage" alt="Product Image"></div>
+
+                        @Html.Action("GetImagesFilter")
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 mt-5">
+                    <h3 class="my-3">Proje Adı</h3>
+                    <p>@Model.ProjectName</p>
+                    <hr />
+                    <h3 class="my-3">Proje Başlığı</h3>
+                    <p>@Model.ProjectTitle</p>
+                    <hr>
+                    <h3 class="my-3">Proje Github</h3>
+                    <p><a href="@Model.ProjectGithubURL" target="_blank">@Model.ProjectGithubURL</a></p>
+                    <hr>
+
+                </div>
+            </div>
+            <div class="row mt-4">
+                <nav class="w-100">
+                    <div class="nav nav-tabs" id="product-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Proje Açıklaması</a>
+                </nav>
+                <div class="tab-content p-3" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab">
+                       @Html.Raw(Model.ProjectDescription)
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Templates/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script>
+<script src="~/Templates/AdminLTE-3.0.4/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/Templates/AdminLTE-3.0.4/dist/js/adminlte.min.js"></script>
+<script src="~/Templates/AdminLTE-3.0.4/dist/js/demo.js"></script>

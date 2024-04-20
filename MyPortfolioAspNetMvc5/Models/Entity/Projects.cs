@@ -11,14 +11,26 @@ namespace MyPortfolioAspNetMvc5.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web.Mvc;
+
     public partial class Projects
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Projects()
+        {
+            this.ProjectImages = new HashSet<ProjectImages>();
+        }
+    
         public int ProjectID { get; set; }
         public string ProjectName { get; set; }
         public string ProjectTitle { get; set; }
+        [AllowHtml]
         public string ProjectDescription { get; set; }
         public string ProjectImage { get; set; }
         public string ProjectGithubURL { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProjectImages> ProjectImages { get; set; }
     }
 }

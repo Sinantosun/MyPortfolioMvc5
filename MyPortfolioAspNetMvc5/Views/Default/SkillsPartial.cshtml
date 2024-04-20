@@ -1,18 +1,48 @@
 ﻿@using MyPortfolioAspNetMvc5.Models.Entity
 @model List<Skills>
-<section class="resume-section" id="skills">
-    <div class="resume-section-content">
-        <h2 class="mb-5">Yeteneklerim</h2>
-        <div class="subheading mb-3">İş Akışı</div>
-       
-        <ul class="fa-ul mb-0">
-            @foreach (var item in Model)
-            {
-                <li>
-                    <span class="fa-li"><i class="fas fa-check"></i></span>
-                    @item.Name
-                </li>
-            }
-        </ul>
-    </div>
-</section>
+<div class="container">
+    <section class="resume-section" id="skills">
+        <div class="resume-section-content">
+            <h2 class="mb-5">Yeteneklerim</h2>
+            <div class="subheading mb-3">İş Akışı</div>
+
+            <ul class="fa-ul mb-0">
+                @foreach (var item in Model)
+                {
+
+                    string backgroundColor = "";
+                    if (item.SkillValue >= 0 && item.SkillValue <= 50)
+                    {
+                        backgroundColor = "progress-bar bg-danger";
+  
+                    }
+                    if (item.SkillValue >= 51 && item.SkillValue <= 70)
+                    {
+                        backgroundColor = "progress-bar bg-warning";
+
+                    }
+                    if (item.SkillValue >= 71 && item.SkillValue <= 84)
+                    {
+                        backgroundColor = "progress-bar bg-primary";
+
+                    }
+                    if (item.SkillValue >= 85 && item.SkillValue <= 100)
+                    {
+                        backgroundColor = "progress-bar bg-success";
+        
+                    }
+
+                    <li>
+                        <span class="fa-li"><i class="fas fa-check"></i></span>
+                        @item.Name
+                        <small><b>@item.SkillValue%</b></small>
+                        <br />
+                        <div class="progress">
+                            <div class="@backgroundColor" role="progressbar" style="width: @item.SkillValue%" aria-valuenow="@item.SkillValue" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </section>
+</div>

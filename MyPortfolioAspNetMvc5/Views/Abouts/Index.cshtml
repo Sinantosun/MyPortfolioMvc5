@@ -62,8 +62,10 @@
                                            <td>@item.Adress</td>
                                            <td>@item.PhoneNumber</td>
                                            <td>@item.Mail</td>
-                                           <td>@item.Description</td>
+                                           <td>@item.Description.Substring(0,10)..</td>
                                            <td>@item.ImageURL</td>
+                                           <td><a class="btn btn-outline-danger" href="/Abouts/DeleteAbout/@item.AboutID"><i class="fa fa-trash"></i>Sil</a></td>
+                                           <td><a class="btn btn-outline-success" href="/Abouts/UpdateAbout/@item.AboutID"><i class="fa fa-edit"></i>  Güncelle</td>
 
                                        </tr>
 

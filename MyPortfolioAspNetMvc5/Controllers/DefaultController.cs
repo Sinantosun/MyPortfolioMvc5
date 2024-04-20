@@ -20,7 +20,17 @@ namespace MyPortfolioAspNetMvc5.Controllers
             var value = _context.Experinces.ToList();
             return PartialView(value);
         }
+        public PartialViewResult AboutPartial()
+        {
+            var value = _context.Abouts.ToList();
+            return PartialView(value);
+        }
 
+        public PartialViewResult ProjectPartial()
+        {
+            var value = _context.Projects.Where(x => x.IsActive == true).ToList();
+            return PartialView(value);
+        }
         public PartialViewResult EducationsPartial()
         {
             var value = _context.Educations.ToList();
@@ -68,7 +78,7 @@ namespace MyPortfolioAspNetMvc5.Controllers
             else
             {
 
-                string err = string.Join("<br>", validationResult.Errors.Select(y=>y.ErrorMessage));
+                string err = string.Join("<br>", validationResult.Errors.Select(y => y.ErrorMessage));
                 TempData["Result"] = err;
                 TempData["Icon"] = "danger";
                 TempData["Color"] = "red";

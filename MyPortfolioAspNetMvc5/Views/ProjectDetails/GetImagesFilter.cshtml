@@ -1,0 +1,6 @@
+﻿@using MyPortfolioAspNetMvc5.Models.Entity
+@model List<ProjectImages>
+@foreach (var item in Model)
+{
+    <div class="product-image-thumb"><img src="@item.ImageURL" alt="Product Image"></div>
+}

@@ -65,16 +65,25 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="Description2" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="ProjectImages">
+          <Key>
+            <PropertyRef Name="ProjectImageID" />
+          </Key>
+          <Property Name="ProjectImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="int" />
+          <Property Name="ImageURL" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Projects">
           <Key>
             <PropertyRef Name="ProjectID" />
           </Key>
           <Property Name="ProjectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProjectName" Type="nvarchar" MaxLength="50" />
-          <Property Name="ProjectTitle" Type="nvarchar" MaxLength="50" />
-          <Property Name="ProjectDescription" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProjectTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProjectDescription" Type="nvarchar(max)" />
           <Property Name="ProjectImage" Type="nvarchar(max)" />
           <Property Name="ProjectGithubURL" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="Skills">
           <Key>
@@ -84,6 +93,16 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
           <Property Name="SkillValue" Type="tinyint" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="UserID" />
@@ -92,6 +111,18 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="20" />
           <Property Name="Password" Type="nvarchar" MaxLength="20" />
         </EntityType>
+        <Association Name="FK_ProjectImages_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="ProjectImages" Type="Self.ProjectImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="ProjectImages">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DbCvModelStoreContainer">
           <EntitySet Name="Abouts" EntityType="Self.Abouts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Certifications" EntityType="Self.Certifications" Schema="dbo" store:Type="Tables" />
@@ -99,9 +130,15 @@
           <EntitySet Name="Educations" EntityType="Self.Educations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Experinces" EntityType="Self.Experinces" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Interests" EntityType="Self.Interests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectImages" EntityType="Self.ProjectImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ProjectImages_Projects" Association="Self.FK_ProjectImages_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectImages" EntitySet="ProjectImages" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -193,18 +230,57 @@
           <EntitySet Name="Users" EntityType="Self.Users" />
           <EntitySet Name="Abouts" EntityType="Self.Abouts" />
           <EntitySet Name="Projects" EntityType="DbCvModel.Projects" />
+          <EntitySet Name="ProjectImages" EntityType="DbCvModel.ProjectImages" />
+          <EntitySet Name="sysdiagrams" EntityType="DbCvModel.sysdiagrams" />
+          <AssociationSet Name="FK_ProjectImages_Projects" Association="DbCvModel.FK_ProjectImages_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectImages" EntitySet="ProjectImages" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Projects">
           <Key>
             <PropertyRef Name="ProjectID" />
           </Key>
           <Property Name="ProjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ProjectImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ProjectGithubURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProjectImages" Relationship="DbCvModel.FK_ProjectImages_Projects" FromRole="Projects" ToRole="ProjectImages" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
+        <EntityType Name="ProjectImages">
+          <Key>
+            <PropertyRef Name="ProjectImageID" />
+          </Key>
+          <Property Name="ProjectImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int32" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Projects" Relationship="DbCvModel.FK_ProjectImages_Projects" FromRole="ProjectImages" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_ProjectImages_Projects">
+          <End Type="DbCvModel.Projects" Role="Projects" Multiplicity="0..1" />
+          <End Type="DbCvModel.ProjectImages" Role="ProjectImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="ProjectImages">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -298,12 +374,33 @@
           <EntitySetMapping Name="Projects">
             <EntityTypeMapping TypeName="DbCvModel.Projects">
               <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ProjectGithubURL" ColumnName="ProjectGithubURL" />
                 <ScalarProperty Name="ProjectImage" ColumnName="ProjectImage" />
                 <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
                 <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
                 <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectImages">
+            <EntityTypeMapping TypeName="DbCvModel.ProjectImages">
+              <MappingFragment StoreEntitySet="ProjectImages">
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="ProjectImageID" ColumnName="ProjectImageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DbCvModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

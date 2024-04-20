@@ -34,5 +34,7 @@ namespace MyPortfolioAspNetMvc5.Models.Entity
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Abouts> Abouts { get; set; }
         public virtual DbSet<Projects> Projects { get; set; }
+        public virtual DbSet<ProjectImages> ProjectImages { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

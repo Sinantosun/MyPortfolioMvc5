@@ -1,0 +1,40 @@
+﻿
+@using MyPortfolioAspNetMvc5.Models.Entity
+@model List<Projects>
+
+
+    <div class="container" id="projects">
+        <div class="row">
+
+            <div class="resume-section-content">
+                <br />
+                <h2 class="mb-5">Projelerim</h2>
+
+            </div>
+
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-6">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top " style="height:350px;" src="@item.ProjectImage" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    @item.ProjectTitle
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="/ProjectDetails/Index/@item.ProjectID"><i class="fa fa-search-plus"></i> Detay</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+
+
+        </div>
+    </div>

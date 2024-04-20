@@ -26,6 +26,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Projelerimin Listesi</h3><br /><br />
                             <a href="/Projects/AddProject/" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i>&nbsp; Yeni Proje Ekle</a>
+                            <a href="/Projects/AddProjectImage/" class="btn btn-outline-secondary"><i class="fa fa-pen"></i>&nbsp; Proje Görseli Ekle</a>
                             <br />
                             <br />
                         </div>
@@ -37,8 +38,12 @@
                                         <th style="width: 10px">#</th>
                                         <th>Proje Adı</th>
                                         <th>Proje Başlığı</th>
-                                        <th>Proje Görseli</th>
+                                        <th>Durumu</th>
+                                        <th>Proje Kapak Fotoğrafı</th>
                                         <th>GitHub</th>
+
+                                        <th>Proje Görselleri</th>
+
                                         <th colspan="2" class="text-center">İşlemler</th>
                                     </tr>
                                 </thead>
@@ -50,15 +55,20 @@
                                             <td>@count</td>
                                             <td>@item.ProjectName</td>
                                             <td>@item.ProjectTitle</td>
-                                            <td><a href="@item.ProjectImage" target="_blank"><img src="@item.ProjectImage" class="img-thumbnail" /></a></td>
-                                            <td><a href="@item.ProjectGithubURL" class="btn btn-outline-info" target="_blank"><i class="fa fa-cat"></i>&nbsp; Aç</a></td>
+                                            <td>@(item.IsActive==true?"Yayında":"Pasif")</td>
 
-                                            <td style="text-align:center">
-                                                <a href="/Projects/DeleteProjects/@item.ProjectID" class="btn btn-outline-danger"><i class="fa fa-trash"></i>&nbsp; Sil</a>
+                                            <td><a href="@item.ProjectImage" target="_blank"><img src="@item.ProjectImage" style="width:200px; object-fit:cover; height:200px;" class="img-thumbnail" /></a></td>
+                                            <td><a href="@item.ProjectGithubURL" class="btn btn-outline-info" target="_blank"><i class="fa fa-cat"></i>&nbsp; Aç</a></td>
+                                            <td>
+                                                <a href="/Projects/ProjectsImages/@item.ProjectID" class="btn btn-outline-secondary"><i class="fa fa-image"></i>&nbsp; Aç</a>
+                                            </td>
+                                            <td>
+                                                <a href="/Projects/ChangeProjectStatus/@item.ProjectID" class="btn btn-outline-info"><i class="fa fa-forward"></i>&nbsp; @(item.IsActive==true?"Pasif Yap":"Yayınla")</a>
                                             </td>
                                             <td>
                                                 <a href="/Projects/UpdateProjects/@item.ProjectID" class="btn btn-outline-success"><i class="fa fa-edit"></i>&nbsp; Güncelle</a>
                                             </td>
+
                                         </tr>
 
                                     }
