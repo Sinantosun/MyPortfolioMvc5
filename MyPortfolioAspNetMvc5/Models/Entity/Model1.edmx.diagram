@@ -17,6 +17,10 @@
         <EntityTypeShape EntityType="DbCvModel.ProjectImages" Width="1.5" PointX="5.625" PointY="7" />
         <EntityTypeShape EntityType="DbCvModel.sysdiagrams" Width="1.5" PointX="7.375" PointY="3.75" />
         <AssociationConnector Association="DbCvModel.FK_ProjectImages_Projects" />
+        <EntityTypeShape EntityType="DbCvModel.Category" Width="1.5" PointX="1.125" PointY="10.375" />
+        <AssociationConnector Association="DbCvModel.FK_Projects_Category" />
+        <EntityTypeShape EntityType="DbCvModel.SocialMedias" Width="1.5" PointX="8.375" PointY="6.75" />
+        <EntityTypeShape EntityType="DbCvModel.Admins" Width="1.5" PointX="9.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

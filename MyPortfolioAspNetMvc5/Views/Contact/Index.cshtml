@@ -1,52 +1,94 @@
 ﻿@model List<MyPortfolioAspNetMvc5.Models.Entity.Contacts>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Mesajlar Sayfası";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<br />
+    <br />
 @if (Model.Count > 0)
 {
-    <section class="content">
-        <div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">@TempData["MesssageType"].ToString() (@Model.Count)</h3>
+                <br />
+                <br />
+                <div class="col-md-6">
+                    <a href="/Contact/GetAllMessages" class="btn btn-outline-primary">Tüm Mesajlar</a> &nbsp;
+                    <a href="/Contact/IsReadMessagesList" class="btn btn-outline-dark">Okunan Mesajlar</a> &nbsp;
+                    <a href="/Contact/Index" class="btn btn-outline-secondary">Okunmayan Mesajlar</a>
+                </div>
 
-            <div class="col-md-12">
-                @foreach (var item in Model)
-                {
-                    <div class="card card-primary card-outline">
-                        <div class="card-header">
-                            <h3 class="card-title">Mesajlar</h3>
-                        </div>
-                        <div class="card-body p-0">
-                            <div class="table-responsive mailbox-messages">
-                                <table class="table table-hover table-striped">
-                                    <tbody>
-                                        <tr>
-                                            <td class="mailbox-name"><a href="read-mail.html">@item.NameSurname</a></td>
-                                            <td class="mailbox-subject">
-                                                <b>@item.Title</b>
-                                            </td>
-                                            <td class="mailbox-attachment"></td>
-                                            <td class="mailbox-date">@item.MessageDate</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" placeholder="Mail Ara">
+                        <div class="input-group-append">
+                            <div class="btn btn-primary">
+                                <i class="fas fa-search"></i>
                             </div>
                         </div>
                     </div>
-                }
-
+                </div>
+                <!-- /.card-tools -->
             </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+
+
+                <table class="table table-responsive-xl table-hover ">
+                    <tbody>
+                        <tr>
+                            <th>Gönderen</th>
+                            <th>Başlık</th>
+                            <th>Tarih</th>
+                            <th>Okundu/Okunmadı</th>
+                            <th>Detay Gör</th>
+                            <th>Okundu/Okunmadı Durumu</th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td class="mailbox-name">@item.NameSurname</td>
+                                <td class="mailbox-subject">
+                                    @item.Title
+                                </td>
+                                <td class="mailbox-date">@item.MessageDate</td>
+                                <td class="mailbox-date">@(item.IsRead==true?"Okudunuz":"Okumadınız")</td>
+
+                                <td class="mailbox-date"><a href="/Contact/ContactDetail/@item.ContactID" class="btn btn-outline-success">Aç</a></td>
+                                <td class="mailbox-date"><a href="/Contact/ChangeReadingStatus/@item.ContactID" class="btn btn-outline-primary">@(item.IsRead==true?"Okunmadı Olarak İşaretle":"Okundu Olarak İşaretle")</a></td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
         </div>
-    </section>
+    </div>
+
+    @Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
 }
 else
 {
-    <div class="d-flex justify-content-start"></div>
-    <div class="d-flex justify-content-end"></div>
-    <div class="d-flex justify-content-center"><div class="alert alert-info">Ooopps!.. burada henüz hiç mesaj yok :(</div></div>
-    <div class="d-flex justify-content-between"></div>
-    <div class="d-flex justify-content-around"></div>
+    
+
+    <div class="d-flex justify-content-center text-center">
+        <div class="alert alert-light">
+            <div class="col-md-12">
+                <a href="/Contact/GetAllMessages" class="btn btn-primary" style="text-decoration:none">Tüm Mesajlar</a> &nbsp;
+                <a href="/Contact/IsReadMessagesList" style="text-decoration:none" class="btn btn-dark">Okunan Mesajlar</a> &nbsp;
+                <a href="/Contact/Index" style="text-decoration:none" class="btn btn-secondary">Okunmayan Mesajlar</a>
+            </div>
+            <br />
+            <span class="text-center">  Ooopps!.. burada henüz hiç mesaj yok :(</span>
+        </div>
+    </div>
+
 }
+
+
 
 
 

@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using MyPortfolioAspNetMvc5.DAL;
 using MyPortfolioAspNetMvc5.Models.Entity;
 using MyPortfolioAspNetMvc5.ValidationResults.ContactValidations;
 using System;
@@ -7,17 +8,26 @@ using System.Web.Mvc;
 
 namespace MyPortfolioAspNetMvc5.Controllers
 {
+    [AllowAnonymous]
     public class DefaultController : Controller
     {
+
         DbCvEntities _context = new DbCvEntities();
+        [HttpGet]
         public ActionResult Index()
         {
-            var values = _context.Abouts.ToList();
-            return View(values);
+          
+            return View();
         }
         public PartialViewResult ExperincePartial()
         {
             var value = _context.Experinces.ToList();
+            return PartialView(value);
+        }
+
+        public PartialViewResult SocaialMediaPartial()
+        {
+            var value = _context.SocialMedias.ToList();
             return PartialView(value);
         }
         public PartialViewResult AboutPartial()
@@ -61,7 +71,7 @@ namespace MyPortfolioAspNetMvc5.Controllers
         }
 
         [HttpPost]
-        public ActionResult ContactPartial(Contacts contacts)
+        public ActionResult Index(Contacts contacts)
         {
             ContactValidator validationRules = new ContactValidator();
             ValidationResult validationResult = validationRules.Validate(contacts);
@@ -73,7 +83,11 @@ namespace MyPortfolioAspNetMvc5.Controllers
                 TempData["Result"] = "Mesajınız başarıyla iletilidi.";
                 TempData["Icon"] = "success";
                 TempData["Color"] = "#6c757d";
-                return Redirect("../Default/Index#contact");
+                MailGenerator mailGenerator = new MailGenerator();
+                mailGenerator.SendMail(contacts.NameSurname, contacts.Title, contacts.MessageContent);
+
+
+                return Redirect("/Default/Index#contact");
             }
             else
             {
@@ -82,7 +96,7 @@ namespace MyPortfolioAspNetMvc5.Controllers
                 TempData["Result"] = err;
                 TempData["Icon"] = "danger";
                 TempData["Color"] = "red";
-                return Redirect("../Default/Index#contact");
+                return Redirect("/Default/Index#contact");
             }
 
 

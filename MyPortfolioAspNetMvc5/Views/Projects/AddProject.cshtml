@@ -1,7 +1,7 @@
 ﻿@using MyPortfolioAspNetMvc5.Models.Entity
 @model Projects
 @{
-    ViewBag.Title = "AddProject";
+    ViewBag.Title = "Proje Ekleme Sayfası";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -38,6 +38,10 @@
                                     <div class="form-group">
                                         @Html.Label("Proje Başlığı")
                                         @Html.TextBoxFor(x => x.ProjectTitle, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Proje Kategorisi")
+                                        @Html.DropDownListFor(x =>x.CategoryID,(List<SelectListItem>)ViewBag.categoryList, "Seçiniz", new {@class="form-control"})
                                     </div>
                                     <div class="form-group">
                                         @Html.Label("Proje GitHubURL")

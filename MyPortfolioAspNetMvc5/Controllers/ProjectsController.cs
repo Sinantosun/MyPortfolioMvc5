@@ -6,28 +6,42 @@ using MyPortfolioAspNetMvc5.ValidationResults.ProjectValidators;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MyPortfolioAspNetMvc5.Controllers
 {
+    [SessionTimeOut]
     public class ProjectsController : Controller
     {
         ProjectRepository _projectRepository = new ProjectRepository();
         ProjectImagesRepository _projectImagesRepository = new ProjectImagesRepository();
-        DbCvEntities _context = new DbCvEntities();
+        CategoryRepository _categoryRepository = new CategoryRepository();
         public ActionResult Index()
         {
-            var values = _context.Projects.OrderByDescending(x => x.IsActive).ToList();
+            var values = _projectRepository.FilterList(x => x.IsActive == true);
             return View(values);
         }
+
+        void loadCategoryList()
+        {
+            List<SelectListItem> values = (from x in _categoryRepository.GetList()
+                                           select new SelectListItem
+                                           {
+                                               Text = x.Name,
+                                               Value = x.CategoryID.ToString()
+                                           }).ToList();
+            ViewBag.categoryList = values;
+        }
+
         [HttpGet]
         public ActionResult AddProject()
         {
+
+            loadCategoryList();
             return View();
         }
         [HttpPost]
@@ -37,45 +51,60 @@ namespace MyPortfolioAspNetMvc5.Controllers
             {
                 TempData["Result"] = "Proje görselini seçiniz.";
                 TempData["Icon"] = "danger";
+                loadCategoryList();
                 return View();
             }
             else
             {
 
-                var guid = Guid.NewGuid();
-                var FileExtension = Path.GetExtension(Request.Files[0].FileName);
-                var fullFileName = guid + FileExtension;
-                if (FileExtension == ".jpg" || FileExtension == ".png" || FileExtension == ".jpeg")
+                if (projects.CategoryID == null)
                 {
-                    projects.ProjectImage = "/Images/Projects/" + fullFileName;
-                    ProjectValidator validationRules = new ProjectValidator();
-                    ValidationResult validationResult = validationRules.Validate(projects);
-                    if (validationResult.IsValid)
-                    {
 
-                        Request.Files[0].SaveAs(Server.MapPath("~/Images/Projects/" + fullFileName));
-                        projects.IsActive = true;
-                        _projectRepository.Insert(projects);
-                        TempData["Result"] = "Kayıt Eklendi";
-                        TempData["Icon"] = "success";
-                        TempData["IsError"] = "true";
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        var err = string.Join("<br>", validationResult.Errors.Select(y => y.ErrorMessage));
-                        TempData["Result"] = err;
-                        TempData["Icon"] = "danger";
-                        return View();
-                    }
+                    TempData["Result"] = "Lütfen proje kategorisini kategori seçiniz";
+                    TempData["Icon"] = "danger";
+                    loadCategoryList();
+                    return View();
                 }
                 else
                 {
+                    var guid = Guid.NewGuid();
+                    var FileExtension = Path.GetExtension(Request.Files[0].FileName);
+                    var fullFileName = guid + FileExtension;
+                    if (FileExtension == ".jpg" || FileExtension == ".png" || FileExtension == ".jpeg")
+                    {
+                        projects.ProjectImage = "/Images/Projects/" + fullFileName;
+                        ProjectValidator validationRules = new ProjectValidator();
+                        ValidationResult validationResult = validationRules.Validate(projects);
+                        if (validationResult.IsValid)
+                        {
 
-                    TempData["Result"] = "Yüklemek istediğiniz göreslin uzantısı(" + FileExtension + ") desteklenmiyor lütfen .jpg - .jpeg - .png uzantılarıyla tekrar deneyin.";
-                    TempData["Icon"] = "danger";
-                    return View();
+                            Request.Files[0].SaveAs(Server.MapPath("~/Images/Projects/" + fullFileName));
+                            projects.IsActive = true;
+                            _projectRepository.Insert(projects);
+                            TempData["Result"] = "Kayıt Eklendi";
+                            TempData["Icon"] = "success";
+                            TempData["IsError"] = "true";
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            var err = string.Join("<br>", validationResult.Errors.Select(y => y.ErrorMessage));
+                            TempData["Result"] = err;
+                            TempData["Icon"] = "danger";
+                            loadCategoryList();
+                            return View();
+                        }
+                    }
+                    else
+                    {
+
+                        TempData["Result"] = "Yüklemek istediğiniz göreslin uzantısı(" + FileExtension + ") desteklenmiyor lütfen .jpg - .jpeg - .png uzantılarıyla tekrar deneyin.";
+                        TempData["Icon"] = "danger";
+                        loadCategoryList();
+                        return View();
+                    }
                 }
+
 
 
             }
@@ -112,44 +141,61 @@ namespace MyPortfolioAspNetMvc5.Controllers
         public ActionResult UpdateProjects(int id)
         {
             var value = _projectRepository.GetByID(id);
+            loadCategoryList();
             return View(value);
+
         }
         [HttpPost]
         public ActionResult UpdateProjects(Projects projects)
         {
-            ProjectValidator validationRules = new ProjectValidator();
-            ValidationResult validationResult = validationRules.Validate(projects);
-            var value = _projectRepository.GetByID(projects.ProjectID);
-            if (validationResult.IsValid)
+            if (projects.CategoryID == null)
             {
-                value.ProjectDescription = projects.ProjectDescription;
-                value.ProjectGithubURL = projects.ProjectGithubURL;
-                if (projects.ProjectImage != null)
-                {
-                    var guid = Guid.NewGuid();
-                    var FileExtension = Path.GetExtension(Request.Files[0].FileName);
-                    var fullFileName = guid + FileExtension;
-                    if (System.IO.File.Exists(Server.MapPath(value.ProjectImage)))
-                    {
-                        System.IO.File.Delete(Server.MapPath(value.ProjectImage));
-                    }
-                    value.ProjectImage = "/Images/Projects/" + fullFileName;
-                    Request.Files[0].SaveAs(Server.MapPath("~/Images/Projects/" + fullFileName));
-                }
-                value.ProjectName = projects.ProjectName;
-                value.ProjectTitle = projects.ProjectTitle;
-                _projectRepository.Update(projects);
-                TempData["Result"] = "Kayıt Güncellendi";
-                TempData["Icon"] = "success";
-                TempData["IsError"] = "true";
-                return RedirectToAction("Index");
+                TempData["Result"] = "Lütfen kategori seçin";
+                TempData["Icon"] = "danger";
+
+                loadCategoryList();
+                return View();
             }
             else
             {
-                var err = string.Join("<br>", validationResult.Errors.Select(y => y.ErrorMessage));
-                TempData["Result"] = err;
-                TempData["Icon"] = "danger";
-                return View(value);
+                ProjectValidator validationRules = new ProjectValidator();
+                ValidationResult validationResult = validationRules.Validate(projects);
+                var value = _projectRepository.GetByID(projects.ProjectID);
+                if (validationResult.IsValid)
+                {
+                    value.ProjectDescription = projects.ProjectDescription;
+                    value.ProjectGithubURL = projects.ProjectGithubURL;
+                    if (projects.ProjectImage != null)
+                    {
+                        var guid = Guid.NewGuid();
+                        var FileExtension = Path.GetExtension(Request.Files[0].FileName);
+                        var fullFileName = guid + FileExtension;
+                        if (System.IO.File.Exists(Server.MapPath(value.ProjectImage)))
+                        {
+                            System.IO.File.Delete(Server.MapPath(value.ProjectImage));
+                        }
+                        value.ProjectImage = "/Images/Projects/" + fullFileName;
+                        Request.Files[0].SaveAs(Server.MapPath("~/Images/Projects/" + fullFileName));
+                    }
+                    value.ProjectName = projects.ProjectName;
+                    value.CategoryID = projects.CategoryID;
+                    value.ProjectTitle = projects.ProjectTitle;
+                    _projectRepository.Update(projects);
+                    TempData["Result"] = "Kayıt Güncellendi";
+                    TempData["Icon"] = "success";
+                    TempData["IsError"] = "true";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    var err = string.Join("<br>", validationResult.Errors.Select(y => y.ErrorMessage));
+                    TempData["Result"] = err;
+                    TempData["Icon"] = "danger";
+
+                    loadCategoryList();
+                    return View(value);
+                }
+
             }
 
         }
@@ -226,31 +272,29 @@ namespace MyPortfolioAspNetMvc5.Controllers
         public ActionResult ProjectsImages(int id)
         {
 
-            var value = _context.ProjectImages.Where(x => x.ProjectID == id).ToList();
-            var value2 = _context.ProjectImages.Include(x => x.Projects).FirstOrDefault(x => x.ProjectID == id);
-            if (value2 != null)
-            {
-                ViewBag.ProjectName = value2.Projects.ProjectName + " Görsel Listesi";
-            }
-            else
-            {
-                ViewBag.ProjectName = "Henüz Hiç Ek Görsel Eklemediniz.";
-            }
-       
+            var value = _projectImagesRepository.FilterList(x => x.ProjectID == id);
+
+            var ProjectName = _projectImagesRepository.GetProjectName(id);
+
+            ViewBag.ProjectName = ProjectName;
+
+
+          
+
             return View(value);
         }
 
         [HttpGet]
         public ActionResult UpdateProjectImage(int id)
         {
-           
-            var value = _context.ProjectImages.FirstOrDefault(x => x.ProjectImageID == id);
+
+            var value = _projectImagesRepository.GetByID(id);
             return View(value);
         }
         [HttpPost]
         public ActionResult UpdateProjectImage(ProjectImages projectImages)
         {
-            var value = _context.ProjectImages.FirstOrDefault(x => x.ProjectImageID == projectImages.ProjectImageID);
+            var value = _projectImagesRepository.GetByID(projectImages.ProjectImageID);
             if (value != null)
             {
                 if (projectImages.ImageURL != null)
@@ -269,10 +313,11 @@ namespace MyPortfolioAspNetMvc5.Controllers
 
                     value.ImageURL = "/Images/Projects/" + fullFile;
 
-                    _context.SaveChanges();
                     TempData["Result"] = "Kayıt Güncellendi";
                     TempData["Icon"] = "success";
                     TempData["IsError"] = "true";
+
+                    _projectImagesRepository.Update(value);
 
 
                     return RedirectToAction("UpdateProjectImage");

@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using MyPortfolioAspNetMvc5.DAL;
 using MyPortfolioAspNetMvc5.Models.Entity;
 using MyPortfolioAspNetMvc5.Repositoryies;
 using MyPortfolioAspNetMvc5.ValidationResults.ExperinceValidators;
@@ -10,6 +11,7 @@ using System.Web.Mvc;
 
 namespace MyPortfolioAspNetMvc5.Controllers
 {
+    [SessionTimeOut]
     public class ExperinceController : Controller
     {
 

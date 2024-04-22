@@ -18,6 +18,22 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pwd" Type="nvarchar" MaxLength="500" />
+          <Property Name="PwdSalt" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="Certifications">
           <Key>
             <PropertyRef Name="CertificationsID" />
@@ -35,6 +51,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="MessageContent" Type="nvarchar" MaxLength="1000" />
           <Property Name="MessageDate" Type="datetime" />
+          <Property Name="IsRead" Type="bit" />
         </EntityType>
         <EntityType Name="Educations">
           <Key>
@@ -84,6 +101,7 @@
           <Property Name="ProjectImage" Type="nvarchar(max)" />
           <Property Name="ProjectGithubURL" Type="nvarchar(max)" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="CategoryID" Type="int" />
         </EntityType>
         <EntityType Name="Skills">
           <Key>
@@ -92,6 +110,14 @@
           <Property Name="SkillsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
           <Property Name="SkillValue" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="SocialMedias">
+          <Key>
+            <PropertyRef Name="SocailMediaID" />
+          </Key>
+          <Property Name="SocailMediaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URL" Type="nvarchar(max)" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -123,8 +149,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Projects_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DbCvModelStoreContainer">
           <EntitySet Name="Abouts" EntityType="Self.Abouts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Certifications" EntityType="Self.Certifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Educations" EntityType="Self.Educations" Schema="dbo" store:Type="Tables" />
@@ -133,11 +173,16 @@
           <EntitySet Name="ProjectImages" EntityType="Self.ProjectImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SocialMedias" EntityType="Self.SocialMedias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ProjectImages_Projects" Association="Self.FK_ProjectImages_Projects">
             <End Role="Projects" EntitySet="Projects" />
             <End Role="ProjectImages" EntitySet="ProjectImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Category" Association="Self.FK_Projects_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Projects" EntitySet="Projects" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -161,6 +206,7 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MessageContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="MessageDate" Type="DateTime" Precision="3" />
+          <Property Name="IsRead" Type="Boolean" />
         </EntityType>
         <EntityType Name="Educations">
           <Key>
@@ -236,6 +282,13 @@
             <End Role="Projects" EntitySet="Projects" />
             <End Role="ProjectImages" EntitySet="ProjectImages" />
           </AssociationSet>
+          <EntitySet Name="Category" EntityType="DbCvModel.Category" />
+          <AssociationSet Name="FK_Projects_Category" Association="DbCvModel.FK_Projects_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <EntitySet Name="SocialMedias" EntityType="DbCvModel.SocialMedias" />
+          <EntitySet Name="Admins" EntityType="DbCvModel.Admins" />
         </EntityContainer>
         <EntityType Name="Projects">
           <Key>
@@ -249,6 +302,8 @@
           <Property Name="ProjectGithubURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ProjectImages" Relationship="DbCvModel.FK_ProjectImages_Projects" FromRole="Projects" ToRole="ProjectImages" />
           <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CategoryID" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="DbCvModel.FK_Projects_Category" FromRole="Projects" ToRole="Category" />
         </EntityType>
         <EntityType Name="ProjectImages">
           <Key>
@@ -281,6 +336,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Projects" Relationship="DbCvModel.FK_Projects_Category" FromRole="Category" ToRole="Projects" />
+        </EntityType>
+        <Association Name="FK_Projects_Category">
+          <End Type="DbCvModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="DbCvModel.Projects" Role="Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SocialMedias">
+          <Key>
+            <PropertyRef Name="SocailMediaID" />
+          </Key>
+          <Property Name="SocailMediaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pwd" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PwdSalt" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -298,6 +390,7 @@
           <EntitySetMapping Name="Contacts">
             <EntityTypeMapping TypeName="DbCvModel.Contacts">
               <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
                 <ScalarProperty Name="MessageDate" ColumnName="MessageDate" />
                 <ScalarProperty Name="ContactID" ColumnName="ContactID" />
                 <ScalarProperty Name="NameSurname" ColumnName="NameSurname" />
@@ -374,6 +467,7 @@
           <EntitySetMapping Name="Projects">
             <EntityTypeMapping TypeName="DbCvModel.Projects">
               <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ProjectGithubURL" ColumnName="ProjectGithubURL" />
                 <ScalarProperty Name="ProjectImage" ColumnName="ProjectImage" />
@@ -401,6 +495,33 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="DbCvModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SocialMedias">
+            <EntityTypeMapping TypeName="DbCvModel.SocialMedias">
+              <MappingFragment StoreEntitySet="SocialMedias">
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="SocailMediaID" ColumnName="SocailMediaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="DbCvModel.Admins">
+              <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="PwdSalt" ColumnName="PwdSalt" />
+                <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

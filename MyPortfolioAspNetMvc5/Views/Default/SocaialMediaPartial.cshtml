@@ -1,0 +1,10 @@
+﻿@model List<MyPortfolioAspNetMvc5.Models.Entity.SocialMedias>
+<div class="social-icons">
+
+    @foreach (var item in Model)
+    {
+        <a class="social-icon" href="@item.URL" target="_blank"><i class="@item.Icon"></i></a>
+
+    }
+
+</div>

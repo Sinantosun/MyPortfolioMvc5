@@ -9,21 +9,33 @@ using System.Web.Mvc;
 
 namespace MyPortfolioAspNetMvc5.Controllers
 {
+    [AllowAnonymous]
     public class ProjectDetailsController : Controller
     {
-        ProjectRepository ProjectRepository = new ProjectRepository();
-        DbCvEntities _context = new DbCvEntities();
+        ProjectRepository projectRepository = new ProjectRepository();
+        ProjectImagesRepository _projectImagesRepository = new ProjectImagesRepository();
+
         public ActionResult Index(int id)
         {
-            var value = ProjectRepository.Filter(x => x.ProjectID == id);
-            return View(value);
+
+            return View();
         }
 
         public PartialViewResult GetImagesFilter(int id)
         {
-            var value = _context.ProjectImages.Where(x => x.ProjectID == id).ToList();
+         
+            var value = _projectImagesRepository.FilterList(x => x.ProjectID == id);
             return PartialView(value);
         }
-       
+
+        public PartialViewResult UIProjectDetailHeadPartial()
+        {
+            return PartialView();
+        }
+        public PartialViewResult UIProjecDetailPartial(int id)
+        {
+            var value = projectRepository.Filter(x => x.IsActive == true && x.ProjectID == id);
+            return PartialView(value);
+        }
     }
 }

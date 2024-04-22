@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "UpdateProjects";
+    ViewBag.Title = "Proje Güncelleme Sayfası";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -47,6 +47,10 @@
                                         @Html.TextBoxFor(x => x.ProjectTitle, new { @class = "form-control" })
                                     </div>
                                     <div class="form-group">
+                                        @Html.Label("Proje Kategorisi")
+                                        @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.categoryList, "Seçiniz", new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
                                         @Html.Label("Proje GitHubURL")
                                         @Html.TextBoxFor(x => x.ProjectGithubURL, new { @class = "form-control" })
                                     </div>
@@ -62,7 +66,7 @@
                                     <div class="form-group">
                                         @Html.Label("Proje Açıklaması (500 karakter)")
                                         <textarea class="form-control" name="ProjectDescription" id="summernote" asp-for="ContentBody">@Model.ProjectDescription</textarea>
-                                       
+
                                     </div>
                                     <div class="form-group">
                                         <button class="btn btn-outline-primary"><i class="fa fa-edit"></i>&nbsp; Güncelle</button>

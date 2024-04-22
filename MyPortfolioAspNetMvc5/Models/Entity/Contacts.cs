@@ -20,5 +20,6 @@ namespace MyPortfolioAspNetMvc5.Models.Entity
         public string Title { get; set; }
         public string MessageContent { get; set; }
         public Nullable<System.DateTime> MessageDate { get; set; }
+        public Nullable<bool> IsRead { get; set; }
     }
 }

@@ -1,7 +1,7 @@
-﻿@using MyPortfolioAspNetMvc5.Models.Entity
-@model List<Abouts>
-@{
+﻿@{  
+    ViewBag.Title = "Ana Sayfa";
     Layout = "~/Views/UILayout/Index.cshtml";
+
 }
 
 @Html.Action("AboutPartial")
@@ -25,7 +25,109 @@
 <hr class="m-0" />
 
 <div class="col-md-12 container-fluid">
-    @Html.Action("ContactPartial")
+
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <script>
+
+        function myfunction(value, elementName) {
+            if (elementName == "nameSurName") {
+                if (value == "") {
+                    $("#errormessageForNameSurName").fadeIn();
+                }
+                else {
+                    $("#errormessageForNameSurName").fadeOut(750);
+                }
+            }
+
+            if (elementName == "Title") {
+                if (value == "") {
+                    $("#errormessageForTitle").fadeIn();
+                }
+                else {
+                    $("#errormessageForTitle").fadeOut(750);
+                }
+            }
+
+            if (elementName == "Email") {
+                if (value == "") {
+                    $("#errormessageForMail").fadeIn();
+                }
+                else {
+                    $("#errormessageForMail").fadeOut(750);
+                }
+            }
+
+            if (elementName == "Description") {
+                if (value == "") {
+                    $("#errormessageContent").fadeIn();
+                }
+                else {
+                    $("#errormessageContent").fadeOut(750);
+                }
+
+                document.getElementById("MessageLegth").innerHTML = value.length + " / 1000";
+
+                if (value.length > 1000) {
+                    document.getElementById("MessageLegth").style.color = 'red';
+                    $("#errormessageForContentLenght").fadeIn();
+                }
+                else {
+
+                    document.getElementById("MessageLegth").style.color = ' #6c757d';
+                    $("#errormessageForContentLenght").fadeOut('slow');
+                }
+
+            }
+        }
+    </script>
+
+    <div class="container">
+        <section class="resume-section" id="contact">
+            <div class="resume-section-content">
+
+                <form method="post">
+
+
+                    <h2 class="mb-1">İletişim</h2>
+                    @if (TempData["Result"] != null)
+                    {
+                        <span style="color:@TempData["Color"]; font-weight:bold">@(TempData["Icon"]!= "success" ? "Hata! mesajınız gönderilemedi lütfen uyarıları kontrol ediniz.":"Mesaj gönderdiğiniz için teşekkürler :) size mail adresiniz üzerinden en kısa sürede dönüş yapacağım.")</span>
+                        <br /><br />
+
+                        <div class="alert alert-@TempData["Icon"]">
+                            @Html.Raw(TempData["Result"])
+                        </div>
+                        <br />
+                    }
+                    <small style="font-weight:bold;">Lütfen aşağıdaki bilgileri lütfen eksiksiz doldurunuz.</small><br /><br />
+                    <label>Ad Soyad</label>
+                    <input onkeyup="myfunction(this.value,'nameSurName')" name="NameSurname" type="text" class="form-control" />
+                    <span class="text-danger" id="errormessageForNameSurName" style="display:none">Lütfen Bu Alanı Doldurun.</span>
+                    <br />
+                    <label>Konu</label>
+                    <input type="text" onkeyup="myfunction(this.value,'Title')" name="Title" class="form-control" />
+                    <span class="text-danger" id="errormessageForTitle" style="display:none">Lütfen Bu Alanı Doldurun.</span>
+                    <br />
+                    <label>E Posta adresiniz</label>
+                    <input type="text" onkeyup="myfunction(this.value,'Email')" name="Mail" class="form-control" />
+                    <span class="text-danger" id="errormessageForMail" style="display:none">Lütfen Bu Alanı Doldurun.</span>
+                    <br />
+                    <label>Mesaj</label>
+                    <textarea rows="10" name="MessageContent" onkeyup="myfunction(this.value,'Description')" class="form-control"></textarea>
+
+                    <span class="text-danger" id="errormessageContent" style="display:none">Lütfen Bu Alanı Doldurun.</span><br />
+                    <span id="MessageLegth">0 / 1000</span><br />
+                    <span class="text-danger" id="errormessageForContentLenght" style="display:none">1000 karakterlik karakter limitini aştınız lütfen mesajınızı kısaltın.</span>
+                    <br />
+                    <br />
+                    <button class="btn btn-info">Mesaj Gönder</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
 </div>
 
 

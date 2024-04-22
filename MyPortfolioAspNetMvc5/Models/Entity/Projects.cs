@@ -29,8 +29,10 @@ namespace MyPortfolioAspNetMvc5.Models.Entity
         public string ProjectImage { get; set; }
         public string ProjectGithubURL { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<int> CategoryID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProjectImages> ProjectImages { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

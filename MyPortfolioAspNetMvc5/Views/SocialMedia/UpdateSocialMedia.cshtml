@@ -1,0 +1,74 @@
+﻿@using MyPortfolioAspNetMvc5.Models.Entity
+@model SocialMedias
+
+@{
+    ViewBag.Title = "Sosyal Medya Güncelleme Sayfası";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Sosyal Medya Alanı</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <br />
+                            <h3 class="card-title">Sosyal Medya Güncelleme Sayfası</h3><br /><br />
+                        </div>
+
+                        <div class="card-body">
+                            <form method="post">
+                                <div class="card-body">
+                                    @Html.HiddenFor(x => x.SocailMediaID, new { @class = "form-control" })
+                                    <div class="form-group">
+                                        @Html.Label("Sosyal Medya URL")
+                                        @Html.TextBoxFor(x => x.URL, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("İkon")
+                                        @Html.TextBoxFor(x => x.Icon, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-outline-primary"><i class="fa fa-edit"></i>&nbsp; Güncelle</button>
+                                    </div>
+                                    @Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -39,5 +39,9 @@ namespace MyPortfolioAspNetMvc5.Repositoryies
         {
             return _context.Set<T>().FirstOrDefault(where);
         }
+        public List<T> FilterList(Expression<Func<T, bool>> where)
+        {
+            return _context.Set<T>().Where(where).ToList();
+        }
     }
 }

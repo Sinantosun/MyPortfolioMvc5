@@ -1,4 +1,5 @@
-﻿using MyPortfolioAspNetMvc5.Models.Entity;
+﻿using MyPortfolioAspNetMvc5.DAL;
+using MyPortfolioAspNetMvc5.Models.Entity;
 using MyPortfolioAspNetMvc5.Repositoryies;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace MyPortfolioAspNetMvc5.Controllers
 {
+    [SessionTimeOut]
     public class CertificateController : Controller
     {
         CertificateRepository certificateRepository = new CertificateRepository();

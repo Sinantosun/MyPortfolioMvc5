@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using MyPortfolioAspNetMvc5.DAL;
 using MyPortfolioAspNetMvc5.Models.Entity;
 using MyPortfolioAspNetMvc5.Repositoryies;
 using MyPortfolioAspNetMvc5.ValidationResults.EducationValidators;
@@ -10,12 +11,13 @@ using System.Web.Mvc;
 
 namespace MyPortfolioAspNetMvc5.Controllers
 {
+    [SessionTimeOut]
     public class EducationController : Controller
     {
-        EducationRepository EducationRepository = new EducationRepository();
+        EducationRepository _educationRepository = new EducationRepository();
         public ActionResult Index()
         {
-            var value = EducationRepository.GetList();
+            var value = _educationRepository.GetList();
             return View(value);
         }
         [HttpGet]
@@ -30,7 +32,7 @@ namespace MyPortfolioAspNetMvc5.Controllers
             ValidationResult validationResult = validationRules.Validate(educations);
             if (validationResult.IsValid)
             {
-                EducationRepository.Insert(educations);
+                _educationRepository.Insert(educations);
 
                 TempData["Icon"] = "success";
                 TempData["Result"] = "Yeni kayıt eklendi";
@@ -52,7 +54,7 @@ namespace MyPortfolioAspNetMvc5.Controllers
         [HttpGet]
         public ActionResult UpdateEducation(int id)
         {
-            var value = EducationRepository.GetByID(id);
+            var value = _educationRepository.GetByID(id);
             return View(value);
         }
         [HttpPost]
@@ -62,14 +64,14 @@ namespace MyPortfolioAspNetMvc5.Controllers
             ValidationResult validationResult = validationRules.Validate(educations);
             if (validationResult.IsValid)
             {
-                var value = EducationRepository.GetByID(educations.EducationID);
+                var value = _educationRepository.GetByID(educations.EducationID);
                 value.Date = educations.Date;
                 value.EducationGNO = educations.EducationGNO;
                 value.SubTitle1 = educations.SubTitle1;
                 value.SubTitle2 = educations.SubTitle2;
                 value.Title = educations.Title;
 
-                EducationRepository.Update(educations);
+                _educationRepository.Update(educations);
 
                 TempData["Icon"] = "success";
                 TempData["Result"] = "Kayıt Güncellendi";
@@ -89,8 +91,8 @@ namespace MyPortfolioAspNetMvc5.Controllers
 
         public ActionResult DeleteEducation(int id)
         {
-            var value = EducationRepository.GetByID(id);
-            EducationRepository.Delete(value);
+            var value = _educationRepository.GetByID(id);
+            _educationRepository.Delete(value);
             TempData["Icon"] = "success";
             TempData["Result"] = "Kayıt Silindi";
             TempData["IsError"] = "true";

@@ -1,0 +1,81 @@
+﻿@using MyPortfolioAspNetMvc5.Models.Entity
+@model List<SocialMedias>
+@{
+    ViewBag.Title = "Sosyal Medya Sayfası";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<div class="wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Sosyal Medya Alanı</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Sosyal Medya Listesi</h3>
+                            <br />
+            
+           
+                            <br />
+                            <a href="/SocialMedia/AddSocialMedia/" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i>&nbsp; Yeni Alan Ekle</a>
+                            <br />
+                            <br />
+                        </div>
+
+                        <div class="card-body">
+                            <table class="table table-responsive-lg table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Sosyal Medya URL</th>
+                                        <th>İkon</th>
+                                        <th colspan="2" class="text-center">İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td><a href="@item.URL" target="_blank">@item.URL</a></td>
+                                            <td><i class="@item.Icon"></i> @item.Icon</td>
+                                            <td><a class="btn btn-outline-danger" href="/SocialMedia/DeleteSocailMedia/@item.SocailMediaID"><i class="fa fa-trash"></i> Sil</a></td>
+                                            <td><a class="btn btn-outline-success" href="/SocialMedia/UpdateSocialMedia/@item.SocailMediaID"><i class="fa fa-edit"></i>  Güncelle</a></td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
+
+
+
+
+
+
+
+
+

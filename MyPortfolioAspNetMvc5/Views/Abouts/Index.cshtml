@@ -1,7 +1,7 @@
 ﻿@using MyPortfolioAspNetMvc5.Models.Entity
 @model List<Abouts>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Hakkımda Sayfası";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     int count = 0;
 }
@@ -31,7 +31,7 @@
                             <small class="card-subtitle">Lütfen tema bütünlüğü için burada tek bir alan bulundurun.</small>
                             <br />
                             <br />
-                            <a href="/Certificate/AddCertificate/" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i>&nbsp; Yeni Alan Ekle</a>
+                            <a href="/Abouts/AddAbout/" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i>&nbsp; Yeni Alan Ekle</a>
                             <br />
                             <br />
                         </div>
@@ -46,8 +46,8 @@
                                         <th>Adress</th>
                                         <th>Telefon No</th>
                                         <th>Mail</th>
-                                        <th>Description</th>
-                                        <th>ImageURL</th>
+                                        <th>Açıklama</th>
+                                        <th>Görsel</th>
                                         <th colspan="2" class="text-center">İşlemler</th>
                                     </tr>
                                 </thead>
@@ -62,10 +62,10 @@
                                            <td>@item.Adress</td>
                                            <td>@item.PhoneNumber</td>
                                            <td>@item.Mail</td>
-                                           <td>@item.Description.Substring(0,10)..</td>
-                                           <td>@item.ImageURL</td>
-                                           <td><a class="btn btn-outline-danger" href="/Abouts/DeleteAbout/@item.AboutID"><i class="fa fa-trash"></i>Sil</a></td>
-                                           <td><a class="btn btn-outline-success" href="/Abouts/UpdateAbout/@item.AboutID"><i class="fa fa-edit"></i>  Güncelle</td>
+                                           <td>@(item.Description.Length>=10?item.Description.Substring(0,10) + "...":item.Description)</td>
+                                           <td><img src="@item.ImageURL" class="img-bordered"  style="border-radius:50%; width:100px; height:100px" /></td>
+                                           <td><a class="btn btn-outline-danger" href="/Abouts/DeleteAbout/@item.AboutID"><i class="fa fa-trash"></i> Sil</a></td>
+                                           <td><a class="btn btn-outline-success" href="/Abouts/UpdateAbout/@item.AboutID"><i class="fa fa-edit"></i>  Güncelle</a></td>
 
                                        </tr>
 

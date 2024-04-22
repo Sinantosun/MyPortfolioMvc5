@@ -1,0 +1,79 @@
+﻿@using MyPortfolioAspNetMvc5.Models.Entity
+@model List<Category>
+
+@{
+    ViewBag.Title = "Kategori Sayfası";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<div class="wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Kategori Alanı</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Kategori Listesi</h3>
+                            <br />
+                            <br />
+                            <a href="/Category/AddCategory/" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i>&nbsp; Yeni Kategori Ekle</a>
+                            <br />
+                            <br />
+                        </div>
+
+                        <div class="card-body">
+                            <table class="table table-responsive-lg table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Kategori Adı</th>
+                                        <th>Sil</th>
+                                        <th>Güncelle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.Name</td>
+                                            <td><a class="btn btn-outline-danger" href="/Category/DeleteCategory/@item.CategoryID"><i class="fa fa-trash"></i> Sil</a></td>
+                                            <td><a class="btn btn-outline-success" href="/Category/UpdateCategory/@item.CategoryID"><i class="fa fa-edit"></i>  Güncelle</a></td>
+
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
+
+
+
+
+
+
+
+
