@@ -10,8 +10,6 @@ Oturum dolduğunda ise oturum açma ekranında sweet alert ile admin tarafina bi
 
 Proje Göselleri
 
-![image](https://github.com/Sinantosun/MyPortfolioMvc5/assets/145317724/75d27c05-70b3-4339-8725-57faf9322f2b)
-
 ![image](https://github.com/Sinantosun/MyPortfolioMvc5/assets/145317724/fe334eef-51b8-4b0d-9715-ab20f748da11)
 
 ![image](https://github.com/Sinantosun/MyPortfolioMvc5/assets/145317724/e9058359-986e-4db2-882c-9a78d997a7b4)
