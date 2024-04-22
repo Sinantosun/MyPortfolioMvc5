@@ -1,4 +1,5 @@
-![image](https://github.com/Sinantosun/MyPortfolioMvc5/assets/145317724/75d27c05-70b3-4339-8725-57faf9322f2b)Merhaba 
+
+Merhaba 
 
 Projede AspNet  MVC5 MSSQL Veritabanı ve Entity Framework DbFirst yaklaşımını benimsedik.
 CRUD İşlemlerinde kod tekrarını önlemek için Repository Design Pattern yapısını kullandık ayrıca Fluent Validation kütüphanesi ile verileri kontrol ettik.
@@ -8,6 +9,8 @@ Bu yapı admin tarafı için geçerli olacak şekilde belirlenen oturum süresi 
 Oturum dolduğunda ise oturum açma ekranında sweet alert ile admin tarafina bilgilendirme işlemi gerçekleştiriliyor.
 
 Proje Göselleri
+
+![image](https://github.com/Sinantosun/MyPortfolioMvc5/assets/145317724/75d27c05-70b3-4339-8725-57faf9322f2b)
 
 ![image](https://github.com/Sinantosun/MyPortfolioMvc5/assets/145317724/fe334eef-51b8-4b0d-9715-ab20f748da11)
 
