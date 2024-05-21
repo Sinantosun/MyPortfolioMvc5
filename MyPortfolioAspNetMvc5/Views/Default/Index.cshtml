@@ -1,6 +1,8 @@
-﻿@{  
+﻿@using System.Configuration;
+@{
     ViewBag.Title = "Ana Sayfa";
     Layout = "~/Views/UILayout/Index.cshtml";
+    string _googlesitekey = ConfigurationManager.AppSettings["GoogleSiteKey"];
 
 }
 
@@ -82,7 +84,7 @@
             }
         }
     </script>
-
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <div class="container">
         <section class="resume-section" id="contact">
             <div class="resume-section-content">
@@ -120,6 +122,11 @@
                     <span class="text-danger" id="errormessageContent" style="display:none">Lütfen Bu Alanı Doldurun.</span><br />
                     <span id="MessageLegth">0 / 1000</span><br />
                     <span class="text-danger" id="errormessageForContentLenght" style="display:none">1000 karakterlik karakter limitini aştınız lütfen mesajınızı kısaltın.</span>
+                    <br />
+                    <br />
+
+
+                    <div class="g-recaptcha" data-sitekey="6Lf58tUpAAAAAHoaUlOI9zZFGN0WXNCkPxJwnLpQ"></div>
                     <br />
                     <br />
                     <button class="btn btn-info">Mesaj Gönder</button>

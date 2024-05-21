@@ -14,14 +14,14 @@ namespace MyPortfolioAspNetMvc5.DAL
         {
             MimeMessage mimeMessage = new MimeMessage();
 
-            MailboxAddress mailAddresFrom = new MailboxAddress("Cv Admin", "sinantosuncvsite@gmail.com");
+            MailboxAddress mailAddresFrom = new MailboxAddress("", "");
             mimeMessage.From.Add(mailAddresFrom);
 
-            MailboxAddress mailAdressTo = new MailboxAddress("Sinan Tosun", "sinan_tosun4141@hotmail.com");
+            MailboxAddress mailAdressTo = new MailboxAddress("", "");
             mimeMessage.To.Add(mailAdressTo);
 
             var bodyBuilder = new BodyBuilder();
-            bodyBuilder.HtmlBody = "Yeni Mesajınız!! Var<br> " + nameSurname.ToUpper() + " Size Mesaj Gönderdi"+ "<br>  Lütfen Siteden Kontrol edin.!";
+            bodyBuilder.HtmlBody = "Yeni Mesajınız Var!! <br><br> " + nameSurname.ToUpper() + " Size " + subject.ToUpper() + " Konu Başlıklı bir mesaj gönderdi detayları için admin panelinden kontrol edin.";
 
             mimeMessage.Body = bodyBuilder.ToMessageBody();
             mimeMessage.Subject = subject;
@@ -29,7 +29,7 @@ namespace MyPortfolioAspNetMvc5.DAL
 
             SmtpClient client = new SmtpClient();
             client.Connect("smtp.gmail.com", 587, false);
-            client.Authenticate("sinantosuncvsite@gmail.com", "lhtn sndy dqqs mncm");
+            client.Authenticate("", "");
             client.Send(mimeMessage);
             client.Disconnect(true);
             return true;

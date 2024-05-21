@@ -6,6 +6,9 @@
     int count = 0;
 }
 
+
+
+@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
 <div class="wrapper">
     <section class="content-header">
         <div class="container-fluid">
@@ -18,72 +21,91 @@
     </section>
 
 
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Projelerimin Listesi</h3><br /><br />
-                            <a href="/Projects/AddProject/" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i>&nbsp; Yeni Proje Ekle</a>
-                            <a href="/Projects/AddProjectImage/" class="btn btn-outline-secondary"><i class="fa fa-pen"></i>&nbsp; Proje Görseli Ekle</a>
-                            <br />
-                            <br />
-                        </div>
+    @if (Model.Count > 0)
+    {
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Projelerimin Listesi</h3><br /><br />
+                                <a href="/Projects/AddProject/" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i>&nbsp; Yeni Proje Ekle</a>
+                                <a href="/Projects/AddProjectImage/" class="btn btn-outline-secondary"><i class="fa fa-pen"></i>&nbsp; Proje Görseli Ekle</a>
+                                <a href="/Projects/Index/" class="btn btn-outline-dark"><i class="fa fa-eye"></i>&nbsp; Yayındaki Projeler</a>
+                                <a href="/Projects/FalseProjectList/" class="btn btn-outline-info"><i class="fa fa-power-off"></i>&nbsp; Pasif Projeler</a>
+                                <br />
+                                <br />
+                            </div>
 
-                        <div class="card-body">
-                            <table class="table table-responsive-lg table-hover">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10px">#</th>
-                                        <th>Proje Adı</th>
-                                        <th>Proje Başlığı</th>
-                                        <th>Durumu</th>
-                                        <th>Proje Kapak Fotoğrafı</th>
-                                        <th>GitHub</th>
-
-                                        <th>Proje Görselleri</th>
-
-                                        <th colspan="2" class="text-center">İşlemler</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        count++;
+                            <div class="card-body">
+                                <table class="table table-responsive-lg table-hover">
+                                    <thead>
                                         <tr>
-                                            <td>@count</td>
-                                            <td>@item.ProjectName</td>
-                                            <td>@item.ProjectTitle</td>
-                                            <td>@(item.IsActive==true?"Yayında":"Pasif")</td>
+                                            <th style="width: 10px">#</th>
+                                            <th>Proje Adı</th>
+                                            <th>Proje Başlığı</th>
+                                            <th>Durumu</th>
+                                            <th>Proje Kapak Fotoğrafı</th>
+                                            <th>GitHub</th>
 
-                                            <td><a href="@item.ProjectImage" target="_blank"><img src="@item.ProjectImage" style="width:200px; object-fit:cover; height:200px;" class="img-thumbnail" /></a></td>
-                                            <td><a href="@item.ProjectGithubURL" class="btn btn-outline-info" target="_blank"><i class="fa fa-cat"></i>&nbsp; Aç</a></td>
-                                            <td>
-                                                <a href="/Projects/ProjectsImages/@item.ProjectID" class="btn btn-outline-secondary"><i class="fa fa-image"></i>&nbsp; Aç</a>
-                                            </td>
-                                            <td>
-                                                <a href="/Projects/ChangeProjectStatus/@item.ProjectID" class="btn btn-outline-info"><i class="fa fa-forward"></i>&nbsp; @(item.IsActive==true?"Pasif Yap":"Yayınla")</a>
-                                            </td>
-                                            <td>
-                                                <a href="/Projects/UpdateProjects/@item.ProjectID" class="btn btn-outline-success"><i class="fa fa-edit"></i>&nbsp; Güncelle</a>
-                                            </td>
+                                            <th>Proje Görselleri</th>
 
+                                            <th colspan="2" class="text-center">İşlemler</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            count++;
+                                            <tr>
+                                                <td>@count</td>
+                                                <td>@item.ProjectName</td>
+                                                <td>@item.ProjectTitle</td>
+                                                <td>@(item.IsActive==true?"Yayında":"Pasif")</td>
 
-                                    }
-                                </tbody>
-                            </table>
+                                                <td><a href="@item.ProjectImage" target="_blank"><img src="@item.ProjectImage" style="width:200px; object-fit:cover; height:200px;" class="img-thumbnail" /></a></td>
+                                                <td><a href="@item.ProjectGithubURL" class="btn btn-outline-info" target="_blank"><i class="fa fa-cat"></i>&nbsp; Aç</a></td>
+                                                <td>
+                                                    <a href="/Projects/ProjectsImages/@item.ProjectID" class="btn btn-outline-secondary"><i class="fa fa-image"></i>&nbsp; Aç</a>
+                                                </td>
+                                                <td>
+                                                    <a href="/Projects/ChangeProjectStatus/@item.ProjectID" class="btn btn-outline-info"><i class="fa fa-forward"></i>&nbsp; @(item.IsActive==true?"Pasif Yap":"Yayınla")</a>
+                                                </td>
+                                                <td>
+                                                    <a href="/Projects/UpdateProjects/@item.ProjectID" class="btn btn-outline-success"><i class="fa fa-edit"></i>&nbsp; Güncelle</a>
+                                                </td>
+
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
-
                     </div>
                 </div>
             </div>
+        </section>
+    }
+    else
+    {
+        <div class="container-fluid">
+            <a href="/Projects/Index/" class="btn btn-outline-dark"><i class="fa fa-eye"></i>&nbsp; Yayındaki Projeler</a>
+            <a href="/Projects/FalseProjectList/" class="btn btn-outline-info"><i class="fa fa-power-off"></i>&nbsp; Pasif Projeler</a>
+            <br />
+            <br />
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fas fa-info"></i> Bilgi</h5>
+                Burada Gösterilecek Öğe Yok.
+            </div>
         </div>
-    </section>
+    }
 </div>
 
-@Html.Partial("~/Views/LayoutPartial/NotificationPartial.cshtml")
+
 
 
 

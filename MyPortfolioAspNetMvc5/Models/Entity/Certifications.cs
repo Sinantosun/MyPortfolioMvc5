@@ -15,6 +15,7 @@ namespace MyPortfolioAspNetMvc5.Models.Entity
     public partial class Certifications
     {
         public int CertificationsID { get; set; }
+
         public string Description { get; set; }
     }
 }

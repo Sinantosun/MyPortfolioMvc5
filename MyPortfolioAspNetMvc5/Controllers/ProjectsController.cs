@@ -26,6 +26,12 @@ namespace MyPortfolioAspNetMvc5.Controllers
             return View(values);
         }
 
+        public ActionResult FalseProjectList()
+        {
+            var values = _projectRepository.FilterList(x => x.IsActive == false);
+            return View("Index", values);
+        }
+
         void loadCategoryList()
         {
             List<SelectListItem> values = (from x in _categoryRepository.GetList()
@@ -279,7 +285,7 @@ namespace MyPortfolioAspNetMvc5.Controllers
             ViewBag.ProjectName = ProjectName;
 
 
-          
+
 
             return View(value);
         }

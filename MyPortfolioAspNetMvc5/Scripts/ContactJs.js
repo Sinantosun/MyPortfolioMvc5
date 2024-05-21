@@ -1,7 +1,7 @@
 ﻿$(function () {
     var _id = 0;
     $(".deleteMessageButton").click(function () {
-        alert(_id);
+     
         $.ajax({
             url: '/Contact/DeleteContact',
             type: 'post',

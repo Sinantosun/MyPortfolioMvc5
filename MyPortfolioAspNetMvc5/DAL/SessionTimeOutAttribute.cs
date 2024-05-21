@@ -10,6 +10,7 @@ namespace MyPortfolioAspNetMvc5.DAL
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            base.OnActionExecuting(filterContext);
             Controller controller = filterContext.Controller as Controller;
 
             HttpContext httpContext = HttpContext.Current;
@@ -23,7 +24,7 @@ namespace MyPortfolioAspNetMvc5.DAL
                 return;
 
             }
-            base.OnActionExecuting(filterContext);
+           
         }
     }
 }

@@ -2,8 +2,14 @@
 using MyPortfolioAspNetMvc5.DAL;
 using MyPortfolioAspNetMvc5.Models.Entity;
 using MyPortfolioAspNetMvc5.ValidationResults.ContactValidations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace MyPortfolioAspNetMvc5.Controllers
@@ -16,7 +22,7 @@ namespace MyPortfolioAspNetMvc5.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-          
+
             return View();
         }
         public PartialViewResult ExperincePartial()
@@ -71,38 +77,72 @@ namespace MyPortfolioAspNetMvc5.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(Contacts contacts)
+        public async Task<ActionResult> Index(Contacts contacts)
         {
-            ContactValidator validationRules = new ContactValidator();
-            ValidationResult validationResult = validationRules.Validate(contacts);
-            if (validationResult.IsValid)
+
+            var captchaImage = HttpContext.Request.Form["g-recaptcha-response"];
+            if (captchaImage == null)
             {
-                contacts.MessageDate = Convert.ToDateTime(DateTime.Now.ToString("g"));
-                _context.Contacts.Add(contacts);
-                _context.SaveChanges();
-                TempData["Result"] = "Mesajınız başarıyla iletilidi.";
-                TempData["Icon"] = "success";
-                TempData["Color"] = "#6c757d";
-                MailGenerator mailGenerator = new MailGenerator();
-                mailGenerator.SendMail(contacts.NameSurname, contacts.Title, contacts.MessageContent);
+                TempData["Result"] = "hata, captcha alanını doldurun.";
+                TempData["Icon"] = "danger";
+                TempData["Color"] = "#red";
+            }
+
+            var verifed = await CheckCatpcha();
+            if (verifed)
+            {
+
+                ContactValidator validationRules = new ContactValidator();
+                ValidationResult validationResult = validationRules.Validate(contacts);
+                if (validationResult.IsValid)
+                {
+                    contacts.IsRead = false;
+                    contacts.MessageDate = Convert.ToDateTime(DateTime.Now.ToString("g"));
+                    _context.Contacts.Add(contacts);
+                    _context.SaveChanges();
+                    TempData["Result"] = "Mesajınız başarıyla iletilidi.";
+                    TempData["Icon"] = "success";
+                    TempData["Color"] = "#6c757d";
+                    MailGenerator mailGenerator = new MailGenerator();
+                    mailGenerator.SendMail(contacts.NameSurname, contacts.Title, contacts.MessageContent);
 
 
-                return Redirect("/Default/Index#contact");
+                }
+                else
+                {
+
+                    string err = string.Join("<br>", validationResult.Errors.Select(y => y.ErrorMessage));
+                    TempData["Result"] = err;
+                    TempData["Icon"] = "danger";
+                    TempData["Color"] = "red";
+
+                }
             }
             else
             {
-
-                string err = string.Join("<br>", validationResult.Errors.Select(y => y.ErrorMessage));
-                TempData["Result"] = err;
+                TempData["Result"] = "Güvenlik doğrulaması başarısız.";
                 TempData["Icon"] = "danger";
-                TempData["Color"] = "red";
-                return Redirect("/Default/Index#contact");
+                TempData["Color"] = "#red";
             }
-
-
-
-
+            return Redirect("/Default/Index#contact");
         }
+
+        public async Task<bool> CheckCatpcha()
+        {
+            var postData = new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("secret", "6Lf58tUpAAAAALjJVJHH-dwKpb2L20-m6VdKZMYC"),
+                new KeyValuePair<string, string>("response", HttpContext.Request.Form["g-recaptcha-response"])
+            };
+
+            var client = new HttpClient();
+            var respones = await client.PostAsync("https://www.google.com/recaptcha/api/siteverify", new FormUrlEncodedContent(postData));
+
+            var _object = (JObject)JsonConvert.DeserializeObject(await respones.Content.ReadAsStringAsync());
+
+            return (bool)_object["success"];
+        }
+
 
     }
 }
